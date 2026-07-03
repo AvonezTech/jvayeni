@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Food UI</title>
     
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts matching the design -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind Custom Configuration -->
@@ -17,8 +17,8 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: '#8c3838', // The maroon brand color
-                        canvas: '#f6f5f0', // The off-white background color
+                        brand: '#8c3838', // Maroon
+                        canvas: '#f6f5f0', // Off-white background
                     },
                     fontFamily: {
                         heading: ['Oswald', 'sans-serif'],
@@ -50,12 +50,9 @@
                 </button>
             </div>
 
-            <!-- Hero Image Placeholder -->
+            <!-- Hero Image -->
             <div class="w-full md:w-1/2">
-                <!-- Replace this gray box with your actual hero image -->
-                <div class="w-full aspect-[4/3] bg-gray-300 rounded-lg shadow-inner flex items-center justify-center text-gray-500 font-medium">
-                    [ Hero Image Placeholder ]
-                </div>
+                <img src="static-images/Group 16.png" alt="Delicious Campus Food" class="w-full aspect-[4/3] object-cover rounded-lg shadow-inner" />
             </div>
 
         </div>
@@ -83,32 +80,42 @@
 
         <!-- 1. PROMO CARDS SECTION -->
         <section>
-            <!-- 4 Column Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 
                 <!-- Promo Card 1 -->
-                <div class="relative h-48 bg-gray-500 rounded-xl overflow-hidden flex flex-col justify-between p-5 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 group-hover:underline">Order now</p>
-                    <!-- To add a background image later, put your <img> tag here with class="absolute inset-0 w-full h-full object-cover mix-blend-overlay z-0" -->
+                <div class="relative h-48 rounded-xl overflow-hidden flex flex-col justify-between p-5 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
+                    <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-black/40 z-0"></div> <!-- Dark Overlay -->
+                    
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
+                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
                 </div>
 
                 <!-- Promo Card 2 -->
-                <div class="relative h-48 bg-gray-500 rounded-xl overflow-hidden flex flex-col justify-between p-5 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 group-hover:underline">Order now</p>
+                <div class="relative h-48 rounded-xl overflow-hidden flex flex-col justify-between p-5 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
+                    <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-black/40 z-0"></div>
+                    
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
+                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
                 </div>
 
                 <!-- Promo Card 3 -->
-                <div class="relative h-48 bg-gray-500 rounded-xl overflow-hidden flex flex-col justify-between p-5 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 group-hover:underline">Order now</p>
+                <div class="relative h-48 rounded-xl overflow-hidden flex flex-col justify-between p-5 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
+                    <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-black/40 z-0"></div>
+                    
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
+                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
                 </div>
 
                 <!-- Promo Card 4 -->
-                <div class="relative h-48 bg-gray-500 rounded-xl overflow-hidden flex flex-col justify-between p-5 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 group-hover:underline">Order now</p>
+                <div class="relative h-48 rounded-xl overflow-hidden flex flex-col justify-between p-5 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
+                    <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-black/40 z-0"></div>
+                    
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
+                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
                 </div>
 
             </div>
@@ -121,42 +128,46 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 
                 <!-- Category Card 1 -->
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer">
-                    <!-- Image Placeholder -->
-                    <div class="h-44 bg-gray-300 w-full flex items-center justify-center text-gray-500 text-sm">
-                        [ Image ]
+                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer group">
+                    <div class="h-44 w-full overflow-hidden">
+                        <img src="static-images/Rectangle 5.png." alt="Breakfast" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
-                    <!-- Card Body -->
-                    <div class="p-4 flex flex-col items-center justify-center text-center">
+                    <div class="p-4 flex flex-col items-center justify-center text-center bg-white relative z-10">
                         <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Breakfast</h3>
                         <p class="text-stone-500 text-xs font-medium">Start your day right</p>
                     </div>
                 </div>
 
                 <!-- Category Card 2 -->
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer">
-                    <div class="h-44 bg-gray-300 w-full flex items-center justify-center text-gray-500 text-sm">[ Image ]</div>
-                    <div class="p-4 flex flex-col items-center justify-center text-center">
-                        <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Breakfast</h3>
-                        <p class="text-stone-500 text-xs font-medium">Start your day right</p>
+                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer group">
+                    <div class="h-44 w-full overflow-hidden">
+                        <img src="static-images/Rectangle 5.png" alt="Lunch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div class="p-4 flex flex-col items-center justify-center text-center bg-white relative z-10">
+                        <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Lunch</h3>
+                        <p class="text-stone-500 text-xs font-medium">Midday fuel</p>
                     </div>
                 </div>
 
                 <!-- Category Card 3 -->
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer">
-                    <div class="h-44 bg-gray-300 w-full flex items-center justify-center text-gray-500 text-sm">[ Image ]</div>
-                    <div class="p-4 flex flex-col items-center justify-center text-center">
-                        <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Breakfast</h3>
-                        <p class="text-stone-500 text-xs font-medium">Start your day right</p>
+                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer group">
+                    <div class="h-44 w-full overflow-hidden">
+                        <img src="static-images/Rectangle 5.png" alt="Snacks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div class="p-4 flex flex-col items-center justify-center text-center bg-white relative z-10">
+                        <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Snacks</h3>
+                        <p class="text-stone-500 text-xs font-medium">Quick bites</p>
                     </div>
                 </div>
 
                 <!-- Category Card 4 -->
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer">
-                    <div class="h-44 bg-gray-300 w-full flex items-center justify-center text-gray-500 text-sm">[ Image ]</div>
-                    <div class="p-4 flex flex-col items-center justify-center text-center">
-                        <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Breakfast</h3>
-                        <p class="text-stone-500 text-xs font-medium">Start your day right</p>
+                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer group">
+                    <div class="h-44 w-full overflow-hidden">
+                        <img src="static-images/Rectangle 5.png" alt="Drinks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div class="p-4 flex flex-col items-center justify-center text-center bg-white relative z-10">
+                        <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Drinks</h3>
+                        <p class="text-stone-500 text-xs font-medium">Refresh yourself</p>
                     </div>
                 </div>
 
@@ -170,16 +181,13 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 
                 <!-- Product Card 1 -->
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1">
-                    <!-- Image Placeholder -->
-                    <div class="h-44 bg-gray-300 w-full flex items-center justify-center text-gray-500 text-sm">
-                        [ Image ]
+                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
+                    <div class="h-44 w-full overflow-hidden">
+                        <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
-                    <!-- Card Body -->
                     <div class="p-4 flex flex-col flex-grow">
                         <h3 class="text-stone-800 font-bold text-sm mb-0.5">Thakali set</h3>
                         <p class="text-stone-900 font-bold text-xs mb-4">Rs. 250</p>
-                        <!-- Add to Tray Button -->
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 rounded-sm transition-colors">
                             Add to Tray
                         </button>
@@ -187,11 +195,13 @@
                 </div>
 
                 <!-- Product Card 2 -->
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1">
-                    <div class="h-44 bg-gray-300 w-full flex items-center justify-center text-gray-500 text-sm">[ Image ]</div>
+                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
+                    <div class="h-44 w-full overflow-hidden">
+                        <img src="static-images/Rectangle 5.png" alt="Momo Plate" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
                     <div class="p-4 flex flex-col flex-grow">
-                        <h3 class="text-stone-800 font-bold text-sm mb-0.5">Thakali set</h3>
-                        <p class="text-stone-900 font-bold text-xs mb-4">Rs. 250</p>
+                        <h3 class="text-stone-800 font-bold text-sm mb-0.5">Chicken Momo</h3>
+                        <p class="text-stone-900 font-bold text-xs mb-4">Rs. 150</p>
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 rounded-sm transition-colors">
                             Add to Tray
                         </button>
@@ -199,11 +209,13 @@
                 </div>
 
                 <!-- Product Card 3 -->
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1">
-                    <div class="h-44 bg-gray-300 w-full flex items-center justify-center text-gray-500 text-sm">[ Image ]</div>
+                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
+                    <div class="h-44 w-full overflow-hidden">
+                        <img src="static-images/Rectangle 5.png" alt="Veg Chowmein" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
                     <div class="p-4 flex flex-col flex-grow">
-                        <h3 class="text-stone-800 font-bold text-sm mb-0.5">Thakali set</h3>
-                        <p class="text-stone-900 font-bold text-xs mb-4">Rs. 250</p>
+                        <h3 class="text-stone-800 font-bold text-sm mb-0.5">Veg Chowmein</h3>
+                        <p class="text-stone-900 font-bold text-xs mb-4">Rs. 120</p>
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 rounded-sm transition-colors">
                             Add to Tray
                         </button>
@@ -211,11 +223,13 @@
                 </div>
 
                 <!-- Product Card 4 -->
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1">
-                    <div class="h-44 bg-gray-300 w-full flex items-center justify-center text-gray-500 text-sm">[ Image ]</div>
+                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
+                    <div class="h-44 w-full overflow-hidden">
+                        <img src="static-images/Rectangle 5.png" alt="Fried Rice" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
                     <div class="p-4 flex flex-col flex-grow">
-                        <h3 class="text-stone-800 font-bold text-sm mb-0.5">Thakali set</h3>
-                        <p class="text-stone-900 font-bold text-xs mb-4">Rs. 250</p>
+                        <h3 class="text-stone-800 font-bold text-sm mb-0.5">Mixed Fried Rice</h3>
+                        <p class="text-stone-900 font-bold text-xs mb-4">Rs. 180</p>
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 rounded-sm transition-colors">
                             Add to Tray
                         </button>
