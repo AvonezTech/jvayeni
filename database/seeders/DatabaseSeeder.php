@@ -50,40 +50,5 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // 5. Seed Menu Items
-        \App\Models\MenuItem::create([
-            'name' => 'Crispy Chicken Burger',
-            'price' => 150.00,
-            'is_special' => true,
-            'is_available' => true,
-            'photo' => 'menu_items/burger.jpg',
-            'menu_category' => 'snacks',
-        ]);
-
-        \App\Models\MenuItem::create([
-            'name' => 'Deluxe Pepperoni Pizza',
-            'price' => 350.00,
-            'is_special' => false,
-            'is_available' => true,
-            'photo' => 'menu_items/pizza.jpg',
-            'menu_category' => 'lunch',
-        ]);
-
-        \App\Models\MenuItem::create([
-            'name' => 'Iced Caramel Latte',
-            'price' => 80.00,
-            'is_special' => false,
-            'is_available' => true,
-            'photo' => 'menu_items/coffee.jpg',
-            'menu_category' => 'beverage',
-        ]);
-
-        \App\Models\MenuItem::create([
-            'name' => 'Steamed Chicken Momo',
-            'price' => 120.00,
-            'is_special' => true,
-            'is_available' => true,
-            'photo' => 'menu_items/momo.jpg',
-            'menu_category' => 'snacks',
-        ]);
-    }
+           }
 }
