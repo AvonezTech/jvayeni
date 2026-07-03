@@ -27,20 +27,25 @@ class OrderResource extends Resource
             ]);
     }
 
-   public static function table(Table $table): Table
-{
-    return $table->columns([
-        Tables\Columns\TextColumn::make('user.name')->label('Student'),
-        Tables\Columns\TextColumn::make('total_price')->money('NPR'),
-        Tables\Columns\SelectColumn::make('status')
-            ->options([
-                'pending' => 'Pending',
-                'prepared' => 'Prepared',
-                'picked_up' => 'Picked Up',
-            ]),
-        Tables\Columns\TextColumn::make('created_at')->since(),
-    ]);
-}
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                //
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+
     public static function getRelations(): array
     {
         return [

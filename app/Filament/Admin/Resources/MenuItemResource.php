@@ -22,19 +22,41 @@ class MenuItemResource extends Resource
             Forms\Components\TextInput::make('price')->required()->numeric()->prefix('Rs.'),
             Forms\Components\Toggle::make('is_special')->label('Today\'s Special'),
             Forms\Components\Toggle::make('is_available')->default(true),
+            Forms\Components\FileUpload::make('photo')->image()->directory('menu_items'),
+            Forms\Components\Select::make('menu_category')
+                ->options([
+                    'snacks' => 'Snacks',
+                    'lunch' => 'Lunch',
+                    'beverage' => 'Beverage',
+                ])
+                ->required(),
         ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table->columns([
-            Tables\Columns\TextColumn::make('name')->searchable(),
-            Tables\Columns\TextColumn::make('price')->money('NPR'),
-            Tables\Columns\IconColumn::make('is_special')->boolean(),
-            Tables\Columns\ToggleColumn::make('is_available'),
+            Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+            Tables\Columns\TextColumn::make('price')->money('NPR')->sortable(),
+            Tables\Columns\IconColumn::make('is_special')->label('Special')->boolean(),
+            Tables\Columns\ToggleColumn::make('is_available')->label('Available'),
+            
+            // Fixed: Removed ->directory(), it reads directly from stored string path
+            Tables\Columns\ImageColumn::make('photo')->disk('public'),
+            
+            // Enhanced: Replaced ->enum() with a colorful badge layout
+            Tables\Columns\TextColumn::make('menu_category')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'snacks' => 'warning',
+                    'lunch' => 'success',
+                    'beverage' => 'info',
+                    default => 'gray',
+                })
+                ->formatStateUsing(fn (string $state): string => ucfirst($state)),
         ])
-        ->actions([Tables\Actions\EditAction::make()])
-        ->bulkActions([Tables\Actions\DeleteBulkAction::make()]);
+            ->actions([Tables\Actions\EditAction::make()])
+            ->bulkActions([Tables\Actions\DeleteBulkAction::make()]);
     }
 
     public static function getPages(): array

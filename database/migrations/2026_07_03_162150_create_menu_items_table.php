@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('menu_items', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
+            $table->decimal('price', 8, 2);
+            $table->boolean('is_special');
+            $table->boolean('is_available');
+            $table->string('photo');
+            $table->string('menu_category');
         });
     }
 
