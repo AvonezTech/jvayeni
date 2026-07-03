@@ -1,24 +1,299 @@
-    <div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6">Today's Menu</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Food - Our Menu</title>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        @foreach($items as $item)
-            <div class="border p-4 rounded-lg shadow-sm {{ $item->is_special ? 'bg-yellow-50 border-yellow-200' : '' }}">
-                <h2 class="text-xl font-semibold">{{ $item->name }}</h2>
-                <p class="text-gray-600">Price: Rs. {{ $item->price }}</p>
-                
-                @if($item->is_special)
-                    <span class="text-xs bg-yellow-400 text-white px-2 py-1 rounded">Special!</span>
-                @endif
-                
-                <form action="{{ route('order.store') }}" method="POST" class="mt-4">
-                    @csrf
-                    <input type="hidden" name="item_id" value="{{ $item->id }}">
-                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-                        Order Now
-                    </button>
-                </form>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Custom Configuration & Custom Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#8c3838', // Maroon
+                        canvas: '#f6f5f0', // Off-white background
+                    },
+                    fontFamily: {
+                        heading: ['Oswald', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom sleek scrollbar for the Today's Special section */
+        .special-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .special-scrollbar::-webkit-scrollbar-track {
+            background: #f6f5f0;
+            border-radius: 8px;
+        }
+        .special-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #8c383880; /* Brand color with opacity */
+            border-radius: 8px;
+        }
+        .special-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #8c3838;
+        }
+    </style>
+</head>
+<body class="bg-canvas text-stone-900 font-sans antialiased">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center lg:justify-center relative">
+        <!-- Desktop Links -->
+        <div class="hidden lg:flex items-center gap-12 font-medium text-stone-600 text-lg">
+            <a href="#" class="hover:text-brand transition-colors">Home</a>
+            <a href="#" class="text-stone-900 border-b-2 border-brand pb-1">Menu</a>
+        </div>
+        
+        <!-- Mobile Menu Placeholder (Optional/Visual) -->
+        <div class="lg:hidden font-heading text-2xl font-bold tracking-wider">
+            MENU
+        </div>
+
+        <!-- Icons (Cart & Profile) -->
+        <div class="flex items-center gap-5 lg:absolute lg:right-8 text-stone-700">
+            <button class="hover:text-brand transition-colors relative">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path></svg>
+            </button>
+            <button class="hover:text-brand transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <div class="flex flex-col-reverse md:flex-row items-center gap-10">
+            
+            <!-- Hero Text Content -->
+            <div class="w-full md:w-1/2 flex flex-col items-start text-left relative z-10">
+                <h1 class="font-heading text-[5.5rem] md:text-[6rem] lg:text-[8rem] font-bold uppercase leading-[0.85] tracking-tight text-stone-900 mb-6">
+                    Our.<br>
+                    <span class="text-brand">Menu.</span>
+                </h1>
+                <p class="text-stone-700 text-lg md:text-xl font-medium max-w-sm leading-relaxed">
+                    Good food fuels great minds. Explore our wholesome and affordable menu.
+                </p>
             </div>
-        @endforeach
+
+            <!-- Hero Image -->
+            <div class="w-full md:w-1/2 relative">
+                <!-- A soft gradient mask on the left side of the image to blend it with the background like the UI -->
+                <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-canvas to-transparent z-10 hidden md:block"></div>
+                <img src="static-images/Group 16.png" alt="Delicious Menu Selection" class="w-full aspect-[4/3] md:aspect-auto object-cover rounded-2xl md:rounded-l-full shadow-lg border-4 border-white/50" />
+            </div>
+
+        </div>
+    </header>
+
+    <!-- TICKER / BANNER SECTION -->
+    <div class="w-full border-y-2 border-brand/20 bg-canvas py-3 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ul class="flex items-center justify-between overflow-x-auto whitespace-nowrap gap-6 text-brand font-medium text-sm md:text-base">
+                <li>Student Combo</li>
+                <li class="w-1.5 h-1.5 rounded-full bg-brand"></li>
+                <li>Today's Special</li>
+                <li class="w-1.5 h-1.5 rounded-full bg-brand"></li>
+                <li>Festival Offers</li>
+                <li class="w-1.5 h-1.5 rounded-full bg-brand"></li>
+                <li>Healthy Meals</li>
+                <li class="w-1.5 h-1.5 rounded-full bg-brand"></li>
+                <li>Student Combo</li>
+            </ul>
+        </div>
     </div>
-</div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        
+        <!-- Flex Container for Grid and Sidebar -->
+        <!-- Responsive magic here: order-first on mobile pushes specials to the top! -->
+        <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 items-start">
+
+            <!-- RIGHT SIDEBAR: TODAY'S SPECIAL (Shows FIRST on Mobile, RIGHT on Desktop) -->
+            <aside class="order-first lg:order-last w-full lg:w-[380px] xl:w-[420px] shrink-0 sticky top-8">
+                
+                <!-- Enhanced Attractive Container -->
+                <div class="bg-white rounded-2xl shadow-2xl shadow-brand/10 border-t-4 border-t-brand p-6 relative overflow-hidden">
+                    
+                    <!-- Decorative Background elements -->
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand/5 rounded-full -translate-y-10 translate-x-10"></div>
+                    
+                    <!-- Header -->
+                    <div class="flex items-center justify-between mb-6 relative z-10">
+                        <h2 class="font-heading text-2xl font-bold uppercase text-stone-900 flex items-center gap-2">
+                            Today's Special
+                            <!-- Pulsing Hot Badge -->
+                            <span class="relative flex h-3 w-3">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-brand"></span>
+                            </span>
+                        </h2>
+                    </div>
+
+                    <!-- SCROLLABLE LIST -->
+                    <!-- Custom scrollbar class added here -->
+                    <div class="max-h-[500px] overflow-y-auto special-scrollbar pr-3 space-y-6 relative z-10">
+                        
+                        <!-- Special Item 1 -->
+                        <div class="flex flex-col bg-canvas/50 rounded-xl overflow-hidden border border-stone-100 hover:border-brand/30 hover:shadow-md transition-all group">
+                            <div class="h-48 w-full overflow-hidden relative">
+                                <span class="absolute top-3 left-3 bg-brand text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm uppercase tracking-wider z-10">Chef's Pick</span>
+                                <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="p-4 bg-white">
+                                <h3 class="text-stone-800 font-bold text-base mb-1">Deluxe Thakali Set</h3>
+                                <p class="text-brand font-bold text-sm mb-4">Rs. 250</p>
+                                <button class="w-full bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2.5 rounded-sm transition-colors shadow-sm">
+                                    Add to Tray
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Special Item 2 -->
+                        <div class="flex flex-col bg-canvas/50 rounded-xl overflow-hidden border border-stone-100 hover:border-brand/30 hover:shadow-md transition-all group">
+                            <div class="h-48 w-full overflow-hidden">
+                                <img src="static-images/Rectangle 5.png" alt="Momo Plate" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="p-4 bg-white">
+                                <h3 class="text-stone-800 font-bold text-base mb-1">Steamy Chicken Momo</h3>
+                                <p class="text-brand font-bold text-sm mb-4">Rs. 180</p>
+                                <button class="w-full bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2.5 rounded-sm transition-colors shadow-sm">
+                                    Add to Tray
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Special Item 3 -->
+                        <div class="flex flex-col bg-canvas/50 rounded-xl overflow-hidden border border-stone-100 hover:border-brand/30 hover:shadow-md transition-all group">
+                            <div class="h-48 w-full overflow-hidden">
+                                <img src="static-images/Rectangle 5.png" alt="Chowmein" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="p-4 bg-white">
+                                <h3 class="text-stone-800 font-bold text-base mb-1">Spicy Pork Chowmein</h3>
+                                <p class="text-brand font-bold text-sm mb-4">Rs. 200</p>
+                                <button class="w-full bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2.5 rounded-sm transition-colors shadow-sm">
+                                    Add to Tray
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+
+            <!-- LEFT SIDE: MAIN MENU ITEMS -->
+            <div class="order-last lg:order-first flex-1 w-full">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold uppercase text-stone-900 mb-8">Menu Items</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-6">
+                    
+                    <!-- Menu Card 1 -->
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
+                        <div class="h-40 md:h-44 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-stone-800 font-bold text-sm mb-0.5">Thakali set</h3>
+                            <p class="text-stone-900 font-bold text-xs mb-4">Rs. 250</p>
+                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 rounded-sm transition-colors">
+                                Add to Tray
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Menu Card 2 -->
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
+                        <div class="h-40 md:h-44 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-stone-800 font-bold text-sm mb-0.5">Thakali set</h3>
+                            <p class="text-stone-900 font-bold text-xs mb-4">Rs. 250</p>
+                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 rounded-sm transition-colors">
+                                Add to Tray
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Menu Card 3 -->
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
+                        <div class="h-40 md:h-44 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-stone-800 font-bold text-sm mb-0.5">Thakali set</h3>
+                            <p class="text-stone-900 font-bold text-xs mb-4">Rs. 250</p>
+                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 rounded-sm transition-colors">
+                                Add to Tray
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Menu Card 4 -->
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
+                        <div class="h-40 md:h-44 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-stone-800 font-bold text-sm mb-0.5">Thakali set</h3>
+                            <p class="text-stone-900 font-bold text-xs mb-4">Rs. 250</p>
+                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 rounded-sm transition-colors">
+                                Add to Tray
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Menu Card 5 -->
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
+                        <div class="h-40 md:h-44 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-stone-800 font-bold text-sm mb-0.5">Thakali set</h3>
+                            <p class="text-stone-900 font-bold text-xs mb-4">Rs. 250</p>
+                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 rounded-sm transition-colors">
+                                Add to Tray
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Menu Card 6 -->
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
+                        <div class="h-40 md:h-44 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-stone-800 font-bold text-sm mb-0.5">Thakali set</h3>
+                            <p class="text-stone-900 font-bold text-xs mb-4">Rs. 250</p>
+                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 rounded-sm transition-colors">
+                                Add to Tray
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Pagination / Accent Block (Matching the UI reference bottom left square) -->
+                <div class="mt-8">
+                    <div class="w-10 h-10 bg-brand rounded-sm shadow-sm cursor-pointer hover:bg-[#732d2d] transition-colors"></div>
+                </div>
+
+            </div>
+            
+        </div>
+    </main>
+
+</body>
+</html>
