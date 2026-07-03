@@ -16,6 +16,9 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'role',
+        'credit_limit',
+        'credit_balance',
     ];
 
     protected $hidden = [
@@ -35,5 +38,30 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return true; 
+    }
+
+    public function isStudent(): bool
+    {
+        return $this->role === 'student';
+    }
+
+    public function isCollegeStaff(): bool
+    {
+        return $this->role === 'college_staff';
+    }
+
+    public function isKitchenStaff(): bool
+    {
+        return $this->role === 'kitchen_staff';
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

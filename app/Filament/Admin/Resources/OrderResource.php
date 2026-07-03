@@ -17,13 +17,52 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
+
+    public static function getEloquentQuery(): Builder
+    {
+        $user = auth()->user();
+        if ($user && ($user->role === 'admin' || $user->role === 'kitchen_staff')) {
+            return parent::getEloquentQuery();
+        }
+        return parent::getEloquentQuery()->where('user_id', $user?->id ?? 0);
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'name')
+                    ->required(),
+                Forms\Components\TextInput::make('total_price')
+                    ->numeric()
+                    ->prefix('Rs.')
+                    ->required(),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'preparing' => 'Preparing',
+                        'ready' => 'Ready',
+                        'completed' => 'Completed',
+                        'cancelled' => 'Cancelled',
+                    ])
+                    ->required(),
+                Forms\Components\Select::make('payment_method')
+                    ->options([
+                        'cash' => 'Cash',
+                        'credit' => 'Credit',
+                        'mixed' => 'Mixed',
+                    ])
+                    ->required(),
+                Forms\Components\TextInput::make('credit_paid')
+                    ->numeric()
+                    ->prefix('Rs.')
+                    ->default(0.00),
+                Forms\Components\TextInput::make('cash_paid')
+                    ->numeric()
+                    ->prefix('Rs.')
+                    ->default(0.00),
             ]);
     }
 
@@ -31,12 +70,67 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('id')
+                    ->label('Order ID')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Customer')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('user.role')
+                    ->label('Role')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'admin' => 'danger',
+                        'kitchen_staff' => 'warning',
+                        'college_staff' => 'success',
+                        'student' => 'info',
+                        default => 'gray',
+                    }),
+                Tables\Columns\TextColumn::make('total_price')
+                    ->money('NPR')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('payment_method')
+                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'gray',
+                        'preparing' => 'info',
+                        'ready' => 'warning',
+                        'completed' => 'success',
+                        'cancelled' => 'danger',
+                        default => 'gray',
+                    })
+                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('start_preparing')
+                    ->label('Prepare')
+                    ->color('info')
+                    ->icon('heroicon-o-play')
+                    ->visible(fn (Order $record) => $record->status === 'pending')
+                    ->action(fn (Order $record) => $record->update(['status' => 'preparing'])),
+                Tables\Actions\Action::make('mark_ready')
+                    ->label('Ready')
+                    ->color('warning')
+                    ->icon('heroicon-o-check-circle')
+                    ->visible(fn (Order $record) => $record->status === 'preparing')
+                    ->action(fn (Order $record) => $record->update(['status' => 'ready'])),
+                Tables\Actions\Action::make('complete')
+                    ->label('Complete')
+                    ->color('success')
+                    ->icon('heroicon-o-check')
+                    ->visible(fn (Order $record) => $record->status === 'ready')
+                    ->action(fn (Order $record) => $record->update(['status' => 'completed'])),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

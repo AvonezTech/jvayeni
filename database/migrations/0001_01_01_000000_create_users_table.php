@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('role')->default('student');
+            $table->decimal('credit_limit', 10, 2)->default(0.00);
+            $table->decimal('credit_balance', 10, 2)->default(0.00);
             $table->rememberToken();
             $table->timestamps();
         });

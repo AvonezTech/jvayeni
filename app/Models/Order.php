@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'total_price', 'status'];
+    protected $fillable = [
+        'user_id',
+        'total_price',
+        'status',
+        'payment_method',
+        'credit_paid',
+        'cash_paid',
+    ];
 
     public function user(): BelongsTo
     {
@@ -18,6 +25,7 @@ class Order extends Model
     public function menuItems(): BelongsToMany
     {
         return $this->belongsToMany(MenuItem::class, 'order_items')
-                    ->withPivot('quantity');
+                    ->withPivot('quantity')
+                    ->withTimestamps();
     }
 }
