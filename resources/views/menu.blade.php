@@ -119,10 +119,7 @@
                         <h2 class="font-heading text-2xl font-bold uppercase text-stone-900 flex items-center gap-2">
                             Today's Special
                             <!-- Pulsing Hot Badge -->
-                            <span class="relative flex h-3 w-3">
-                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
-                              <span class="relative inline-flex rounded-full h-3 w-3 bg-brand"></span>
-                            </span>
+                            
                         </h2>
                     </div>
 
