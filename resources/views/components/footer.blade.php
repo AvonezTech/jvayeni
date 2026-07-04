@@ -33,13 +33,13 @@
                         </a>
                     </li>
                     
-                    
+                    <!-- Updated Contact: Phone Number -->
                     <li>
-                        <a href="mailto:canteen@kbc.edu.np" class="flex items-start gap-2 hover:text-white transition-colors duration-200 group">
+                        <a href="tel:+9779766481563" class="flex items-start gap-2 hover:text-white transition-colors duration-200 group">
                             <svg class="w-5 h-5 mt-0.5 text-white/60 group-hover:text-white transition-colors duration-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                             </svg>
-                            <span class="underline underline-offset-4 decoration-white/20 group-hover:decoration-white transition-colors duration-200">canteen@kbc.edu.np</span>
+                            <span class="underline underline-offset-4 decoration-white/20 group-hover:decoration-white transition-colors duration-200">+977-9766481563</span>
                         </a>
                     </li>
                     
@@ -49,8 +49,14 @@
         </div>
 
         <div class="border-t border-white/20 mt-12 lg:mt-8 pt-6 lg:pt-4 flex flex-col md:flex-row items-center justify-between text-xs font-medium text-white/60">
-            <p>© 2026 Campus Food. All rights reserved.</p>
-            <div class="flex gap-4 mt-4 md:mt-0">
+            <p class="w-full md:w-auto text-center md:text-left order-1">© 2026 Campus Food. All rights reserved.</p>
+            
+            <!-- Highlighted Center Credit -->
+            <div class="my-4 md:my-0 text-white font-semibold order-2 text-center">
+                Made by <a href="https://techzenova.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 decoration-white/40 hover:decoration-white transition-colors">Zenova</a>
+            </div>
+            
+            <div class="flex gap-4 w-full md:w-auto justify-center md:justify-end order-3">
                 <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
                 <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
             </div>
