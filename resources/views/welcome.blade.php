@@ -116,7 +116,7 @@
                     
                     <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-[#ECE5DB] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
                         <div class="h-44 md:h-48 w-full overflow-hidden">
-                            <img src="static-images/Rectangle 5.png" alt="Breakfast" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                            <img src="static-images/sandwich.jpg" alt="Breakfast" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                         </div>
                         <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
                             <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Breakfast</h3>
@@ -126,7 +126,7 @@
 
                     <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
                         <div class="h-44 md:h-48 w-full overflow-hidden">
-                            <img src="static-images/Rectangle 5.png" alt="Lunch" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                            <img src="static-images/khana.jpg" alt="Lunch" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                         </div>
                         <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
                             <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Lunch</h3>
@@ -136,7 +136,7 @@
 
                     <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
                         <div class="h-44 md:h-48 w-full overflow-hidden">
-                            <img src="static-images/Rectangle 5.png" alt="Snacks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                            <img src="static-images/chowmin.jpg" alt="Snacks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                         </div>
                         <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
                             <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Snacks</h3>
@@ -146,7 +146,7 @@
 
                     <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
                         <div class="h-44 md:h-48 w-full overflow-hidden">
-                            <img src="static-images/Rectangle 5.png" alt="Drinks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                            <img src="static-images/tea.jpg" alt="Drinks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                         </div>
                         <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
                             <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Drinks</h3>
@@ -164,10 +164,10 @@
                     
                     <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 group">
                         <div class="h-44 md:h-48 w-full overflow-hidden">
-                            <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                            <img src="static-images/khana.jpg" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                         </div>
                         <div class="p-4 md:p-5 flex flex-col flex-grow">
-                            <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Thakali set</h3>
+                            <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Khana set</h3>
                             <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 250</p>
                             <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
                                 <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
@@ -177,11 +177,11 @@
 
                     <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 group">
                         <div class="h-44 md:h-48 w-full overflow-hidden">
-                            <img src="static-images/Rectangle 5.png" alt="Momo Plate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                            <img src="static-images/sadeko.webp" alt="Momo Plate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                         </div>
                         <div class="p-4 md:p-5 flex flex-col flex-grow">
-                            <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Chicken Momo</h3>
-                            <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 150</p>
+                            <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Chauchau Sadeko</h3>
+                            <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 50</p>
                             <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
                                  <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
                             </button>
@@ -190,10 +190,10 @@
 
                     <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 group">
                         <div class="h-44 md:h-48 w-full overflow-hidden">
-                            <img src="static-images/Rectangle 5.png" alt="Veg Chowmein" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                            <img src="static-images/chowmin.jpg" alt="Veg Chowmein" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                         </div>
                         <div class="p-4 md:p-5 flex flex-col flex-grow">
-                            <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Veg Chowmein</h3>
+                            <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1"> Chowmein</h3>
                             <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 120</p>
                             <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
                                  <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
@@ -203,7 +203,7 @@
 
                     <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 group">
                         <div class="h-44 md:h-48 w-full overflow-hidden">
-                            <img src="static-images/Rectangle 5.png" alt="Fried Rice" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                            <img src="static-images/rice.avif" alt="Fried Rice" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                         </div>
                         <div class="p-4 md:p-5 flex flex-col flex-grow">
                             <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Mixed Fried Rice</h3>
@@ -223,19 +223,19 @@
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
                     
                     <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
-                        <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        <img src="static-images/samosa.jpg" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                     </div>
 
                     <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
-                        <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        <img src="static-images/sandwich.jpg" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                     </div>
 
                     <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
-                        <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        <img src="static-images/rice.avif" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                     </div>
 
                     <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
-                        <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        <img src="static-images/pakauras.jpg" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                     </div>
 
                 </div>
