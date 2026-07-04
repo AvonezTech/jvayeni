@@ -11,67 +11,26 @@ class OrderController extends Controller
 {
     public function store(Request $request)
     {
-        // 1. Validate the incoming order
-        $validated = $request->validate([
-            'item_id' => 'required|exists:menu_items,id',
+        $request->validate([
+            'menu_item_id' => ['required', 'exists:menu_items,id'],
         ]);
 
-        $user = Auth::user();
-        if (!$user) {
-            return back()->with('error', 'You must be logged in to order.');
-        }
+        $menuItem = MenuItem::where('is_available', true)
+            ->findOrFail($request->menu_item_id);
 
-        $item = MenuItem::findOrFail($validated['item_id']);
-        $totalPrice = $item->price;
-
-        $paymentMethod = 'cash';
-        $creditPaid = 0.00;
-        $cashPaid = 0.00;
-
-        if ($user->role === 'college_staff') {
-            if ($user->credit_balance >= $totalPrice) {
-                $creditPaid = $totalPrice;
-                $cashPaid = 0.00;
-                $paymentMethod = 'credit';
-                
-                // Deduct from credit balance
-                $user->credit_balance -= $totalPrice;
-                $user->save();
-
-                $message = "Order placed! Rs. " . number_format($totalPrice, 2) . " deducted from your monthly credit balance.";
-            } else {
-                $creditPaid = $user->credit_balance;
-                $cashPaid = $totalPrice - $user->credit_balance;
-                $paymentMethod = 'mixed';
-
-                // Reduce credit balance to 0
-                $user->credit_balance = 0.00;
-                $user->save();
-
-                $message = "Order placed! Rs. " . number_format($creditPaid, 2) . " deducted from credit, and remaining Rs. " . number_format($cashPaid, 2) . " to be paid in cash.";
-            }
-        } else {
-            // Student, Admin, Kitchen Staff pay in cash
-            $creditPaid = 0.00;
-            $cashPaid = $totalPrice;
-            $paymentMethod = 'cash';
-
-            $message = "Order placed! Rs. " . number_format($totalPrice, 2) . " to be paid in cash.";
-        }
-
-        // 2. Create the order
         $order = Order::create([
-            'user_id' => $user->id,
-            'total_price' => $totalPrice,
+            'user_id' => Auth::id(),
+            'total' => $menuItem->price,
             'status' => 'pending',
-            'payment_method' => $paymentMethod,
-            'credit_paid' => $creditPaid,
-            'cash_paid' => $cashPaid,
         ]);
 
-        // 3. Attach item to pivot table
-        $order->menuItems()->attach($item->id, ['quantity' => 1]);
+        $order->menuItems()->attach($menuItem->id, [
+            'quantity' => 1,
+            'price' => $menuItem->price,
+        ]);
 
-        return back()->with('success', $message);
+        return redirect()
+            ->route('menu')
+            ->with('success', $menuItem->name . ' added to tray successfully.');
     }
 }

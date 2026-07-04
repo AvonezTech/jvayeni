@@ -38,9 +38,19 @@ Route::get('/', function () {
 // Menu Page
 Route::get('/menu', function () {
 
-    $items = MenuItem::where('is_available', true)->get();
+    // Get all available menu items
+    $items = MenuItem::where('is_available', true)
+        ->latest()
+        ->get();
 
-    return view('menu', compact('items'));
+    // Get today's special items
+    $specialItems = MenuItem::where('is_available', true)
+        ->where('is_special', true)
+        ->latest()
+        ->take(5)
+        ->get();
+
+    return view('menu', compact('items', 'specialItems'));
 
 })->name('menu');
 
