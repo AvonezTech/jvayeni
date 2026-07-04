@@ -5,6 +5,7 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -17,8 +18,6 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'password',
         'role',
-        'credit_limit',
-        'credit_balance',
     ];
 
     protected $hidden = [
@@ -26,18 +25,15 @@ class User extends Authenticatable implements FilamentUser
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | Role Helpers
+    |--------------------------------------------------------------------------
+    */
 
-    // Required for Filament to verify this user can login to the admin panel
-    public function canAccessPanel(Panel $panel): bool
+    public function isAdmin(): bool
     {
-        return true; 
+        return $this->role === 'admin';
     }
 
     public function isStudent(): bool
@@ -45,23 +41,39 @@ class User extends Authenticatable implements FilamentUser
         return $this->role === 'student';
     }
 
-    public function isCollegeStaff(): bool
+    /*
+    |--------------------------------------------------------------------------
+    | Filament Admin Access
+    |--------------------------------------------------------------------------
+    */
+
+    public function canAccessPanel(Panel $panel): bool
     {
-        return $this->role === 'college_staff';
+        return $this->isAdmin();
     }
 
-    public function isKitchenStaff(): bool
-    {
-        return $this->role === 'kitchen_staff';
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
-    public function isAdmin(): bool
-    {
-        return $this->role === 'admin';
-    }
-
-    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Casts
+    |--------------------------------------------------------------------------
+    */
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
     }
 }

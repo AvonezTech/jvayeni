@@ -9,53 +9,58 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Login user
     public function login(Request $request)
     {
-        // Validate login form
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        // Try to login
         if (Auth::attempt($credentials)) {
+            if (Auth::user()->role === 'admin') {
+                Auth::logout();
 
-            // Secure session after login
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return back()
+                    ->withErrors([
+                        'email' => 'Admin accounts cannot login from website login. Please use admin panel.',
+                    ])
+                    ->onlyInput('email');
+            }
+
             $request->session()->regenerate();
 
-            // Redirect to menu.blade.php
             return redirect()->route('menu');
         }
 
-        // If login fails
-        return back()->withErrors([
-            'email' => 'The provided email or password is incorrect.',
-        ])->onlyInput('email');
+        return back()
+            ->withErrors([
+                'email' => 'The provided email or password is incorrect.',
+            ])
+            ->onlyInput('email');
     }
 
-
-    // Register user
     public function register(Request $request)
     {
-        // Validate register form
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6', 'confirmed'],
         ]);
 
-        // Create user
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => 'student',
         ]);
 
-        // Automatically login after register
         Auth::login($user);
 
-        // Redirect to menu.blade.php
+        $request->session()->regenerate();
+
         return redirect()->route('menu');
     }
 }
