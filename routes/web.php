@@ -140,3 +140,9 @@ Route::post('/logout', function () {
 Route::post('/order', [OrderController::class, 'store'])
     ->name('order.store')
     ->middleware('auth');
+
+
+
+    Route::get('/my-orders', [OrderController::class, 'myOrders'])
+    ->name('orders.my')
+    ->middleware('auth');

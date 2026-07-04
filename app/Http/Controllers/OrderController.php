@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\MenuItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class OrderController extends Controller
 {
@@ -29,42 +29,16 @@ class OrderController extends Controller
         DB::beginTransaction();
 
         try {
-            $now = now();
-
-            /*
-            |--------------------------------------------------------------------------
-            | Save order
-            |--------------------------------------------------------------------------
-            */
-
-            $orderData = [
+            $order = Order::create([
                 'user_id' => Auth::id(),
-                'status' => 'confirmed',
-            ];
+                'total_price' => $totalPrice,
+                'status' => 'pending',
 
-            if (Schema::hasColumn('orders', 'total_price')) {
-                $orderData['total_price'] = $totalPrice;
-            }
-
-            if (Schema::hasColumn('orders', 'total')) {
-                $orderData['total'] = $totalPrice;
-            }
-
-            if (Schema::hasColumn('orders', 'created_at')) {
-                $orderData['created_at'] = $now;
-            }
-
-            if (Schema::hasColumn('orders', 'updated_at')) {
-                $orderData['updated_at'] = $now;
-            }
-
-            $orderId = DB::table('orders')->insertGetId($orderData);
-
-            /*
-            |--------------------------------------------------------------------------
-            | Save order items
-            |--------------------------------------------------------------------------
-            */
+                // Default payment values
+                'payment_method' => 'cash',
+                'credit_paid' => 0,
+                'cash_paid' => $totalPrice,
+            ]);
 
             foreach ($cart as $cartItem) {
                 $menuItem = MenuItem::find($cartItem['id']);
@@ -73,41 +47,9 @@ class OrderController extends Controller
                     continue;
                 }
 
-                $quantity = (int) $cartItem['quantity'];
-                $unitPrice = (float) $cartItem['price'];
-                $lineTotal = $quantity * $unitPrice;
-
-                $orderItemData = [
-                    'order_id' => $orderId,
-                    'menu_item_id' => $menuItem->id,
-                    'quantity' => $quantity,
-                ];
-
-                if (Schema::hasColumn('order_items', 'price')) {
-                    $orderItemData['price'] = $unitPrice;
-                }
-
-                if (Schema::hasColumn('order_items', 'unit_price')) {
-                    $orderItemData['unit_price'] = $unitPrice;
-                }
-
-                if (Schema::hasColumn('order_items', 'total_price')) {
-                    $orderItemData['total_price'] = $lineTotal;
-                }
-
-                if (Schema::hasColumn('order_items', 'subtotal')) {
-                    $orderItemData['subtotal'] = $lineTotal;
-                }
-
-                if (Schema::hasColumn('order_items', 'created_at')) {
-                    $orderItemData['created_at'] = $now;
-                }
-
-                if (Schema::hasColumn('order_items', 'updated_at')) {
-                    $orderItemData['updated_at'] = $now;
-                }
-
-                DB::table('order_items')->insert($orderItemData);
+                $order->menuItems()->attach($menuItem->id, [
+                    'quantity' => $cartItem['quantity'],
+                ]);
             }
 
             DB::commit();
@@ -115,11 +57,10 @@ class OrderController extends Controller
             session()->forget('cart');
 
             return redirect()
-                ->route('cart.index')
+                ->route('orders.my')
                 ->with([
                     'success' => 'Order confirmed successfully.',
-                    'order_confirmed' => true,
-                    'order_id' => $orderId,
+                    'order_id' => $order->id,
                 ]);
 
         } catch (\Throwable $e) {
@@ -131,5 +72,15 @@ class OrderController extends Controller
                     'order' => 'Order could not be confirmed. ' . $e->getMessage(),
                 ]);
         }
+    }
+
+    public function myOrders()
+    {
+        $orders = Order::where('user_id', Auth::id())
+            ->with('menuItems')
+            ->latest()
+            ->get();
+
+        return view('my-orders', compact('orders'));
     }
 }

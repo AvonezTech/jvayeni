@@ -19,6 +19,10 @@
                         Logout
                     </button>
                 </form>
+
+                <a href="{{ route('orders.my') }}" class="text-sm font-medium text-stone-700 hover:text-brand transition">
+    🛒
+</a>
             @else
                 <!-- Show Login if logged out -->
                 <a href="{{ route('login') }}" class="bg-brand hover:bg-[#732d2d] text-white font-medium text-sm px-6 py-2 rounded-sm transition-colors duration-200 shadow-sm">
