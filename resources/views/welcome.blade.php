@@ -14,8 +14,8 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: '#8c3838', // Maroon
-                        canvas: '#f6f5f0', // Off-white background
+                        brand: '#8c3838',
+                        canvas: '#f6f5f0',
                     },
                     fontFamily: {
                         heading: ['Oswald', 'sans-serif'],
@@ -39,9 +39,11 @@
                     <span class="text-brand">Affordable.</span><br>
                     Campus Food.
                 </h1>
+
                 <p class="text-stone-700 text-lg md:text-xl font-medium max-w-md mb-8 md:mb-10 leading-relaxed">
                     Good food fuels great minds. Enjoy wholesome meals made fresh every day for our campus family.
                 </p>
+
                 <button class="bg-brand hover:bg-[#732d2d] text-white font-medium text-lg px-8 py-3.5 rounded-sm transition-colors duration-200">
                     View Today's Menu
                 </button>
@@ -54,24 +56,12 @@
         </div>
     </header>
 
+    <!-- TICKER / BANNER SECTION -->
     <div class="w-full border-y-2 border-[#A44D49] bg-[#F8F6F1] py-3.5 overflow-hidden block relative left-0 right-0 m-0 p-0">
-        <div class="w-full overflow-hidden relative">
-            <div class="flex whitespace-nowrap gap-8 items-center min-w-full w-max animate-[pingpong_25s_ease-in-out_infinite] hover:[animation-play-state:paused]">
+        <div id="marquee-container" class="flex whitespace-nowrap w-full overflow-hidden relative">
+            <div id="marquee-track" class="flex whitespace-nowrap gap-8 items-center will-change-transform transform-gpu">
                 
                 <ul class="flex items-center gap-8 text-brand font-medium text-sm md:text-base shrink-0">
-                    <li>Student Combo</li>
-                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                    <li>Today's Special</li>
-                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                    <li>Festival Offers</li>
-                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                    <li>Healthy Meals</li>
-                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                    <li>Student Combo</li>
-                </ul>
-
-                <ul class="flex items-center gap-8 text-brand font-medium text-sm md:text-base shrink-0" aria-hidden="true">
-                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
                     <li>Student Combo</li>
                     <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
                     <li>Today's Special</li>
@@ -87,20 +77,106 @@
         </div>
     </div>
 
-    <style>
-    @keyframes pingpong {
-        0% {
-            transform: translateX(0%);
-        }
-        50% {
-            /* Smoothly shifts the exact track length adjusting the gap padding to bounce back */
-            transform: translateX(calc(-100% + 100vw)); 
-        }
-        100% {
-            transform: translateX(0%);
-        }
-    }
-    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const track = document.getElementById("marquee-track");
+            const container = document.getElementById("marquee-container");
+
+            if (!track || !container) return;
+
+            const originalList = track.querySelector("ul");
+
+            if (!originalList) return;
+
+            let speed = 1.2;
+            let scrollPos = 0;
+            let loopWidth = 0;
+            let isPaused = false;
+            let animationFrame = null;
+            let resizeTimer = null;
+
+            function setupMarquee() {
+                track.querySelectorAll('ul[aria-hidden="true"]').forEach(function (clone) {
+                    clone.remove();
+                });
+
+                scrollPos = 0;
+                loopWidth = 0;
+                track.style.transition = "none";
+                track.style.transform = "translate3d(0, 0, 0)";
+
+                const containerWidth = container.getBoundingClientRect().width;
+                const originalWidth = originalList.getBoundingClientRect().width;
+
+                let totalWidth = originalWidth;
+                let cloneCount = 0;
+
+                while (totalWidth < containerWidth * 3 || cloneCount < 2) {
+                    const clone = originalList.cloneNode(true);
+                    clone.setAttribute("aria-hidden", "true");
+                    track.appendChild(clone);
+
+                    totalWidth += originalWidth;
+                    cloneCount++;
+                }
+
+                const firstClone = track.querySelector('ul[aria-hidden="true"]');
+
+                if (firstClone) {
+                    loopWidth = firstClone.offsetLeft;
+                } else {
+                    loopWidth = originalWidth;
+                }
+            }
+
+            function animateMarquee() {
+                if (!isPaused && loopWidth > 0) {
+                    scrollPos -= speed;
+
+                    if (Math.abs(scrollPos) >= loopWidth) {
+                        scrollPos += loopWidth;
+                    }
+
+                    track.style.transform = `translate3d(${scrollPos}px, 0, 0)`;
+                }
+
+                animationFrame = requestAnimationFrame(animateMarquee);
+            }
+
+            function restartMarquee() {
+                if (animationFrame) {
+                    cancelAnimationFrame(animationFrame);
+                }
+
+                setupMarquee();
+                animateMarquee();
+            }
+
+            track.addEventListener("mouseenter", function () {
+                isPaused = true;
+            });
+
+            track.addEventListener("mouseleave", function () {
+                isPaused = false;
+            });
+
+            window.addEventListener("resize", function () {
+                clearTimeout(resizeTimer);
+
+                resizeTimer = setTimeout(function () {
+                    restartMarquee();
+                }, 150);
+            });
+
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(function () {
+                    restartMarquee();
+                });
+            } else {
+                restartMarquee();
+            }
+        });
+    </script>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-24 space-y-16 md:space-y-20 lg:space-y-24">
 
@@ -151,6 +227,7 @@
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Breakfast" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
+
                     <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
                         <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Breakfast</h3>
                         <p class="text-stone-500 text-xs md:text-sm font-medium">Start your day right</p>
@@ -161,6 +238,7 @@
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Lunch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
+
                     <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
                         <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Lunch</h3>
                         <p class="text-stone-500 text-xs md:text-sm font-medium">Midday fuel</p>
@@ -171,6 +249,7 @@
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Snacks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
+
                     <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
                         <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Snacks</h3>
                         <p class="text-stone-500 text-xs md:text-sm font-medium">Quick bites</p>
@@ -181,6 +260,7 @@
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Drinks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
+
                     <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
                         <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Drinks</h3>
                         <p class="text-stone-500 text-xs md:text-sm font-medium">Refresh yourself</p>
@@ -199,9 +279,11 @@
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
+
                     <div class="p-4 md:p-5 flex flex-col flex-grow">
                         <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Thakali set</h3>
                         <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 250</p>
+
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
                             Add to Tray
                         </button>
@@ -212,9 +294,11 @@
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Momo Plate" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
+
                     <div class="p-4 md:p-5 flex flex-col flex-grow">
                         <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Chicken Momo</h3>
                         <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 150</p>
+
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
                             Add to Tray
                         </button>
@@ -225,9 +309,11 @@
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Veg Chowmein" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
+
                     <div class="p-4 md:p-5 flex flex-col flex-grow">
                         <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Veg Chowmein</h3>
                         <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 120</p>
+
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
                             Add to Tray
                         </button>
@@ -238,9 +324,11 @@
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Fried Rice" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
+
                     <div class="p-4 md:p-5 flex flex-col flex-grow">
                         <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Mixed Fried Rice</h3>
                         <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 180</p>
+
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
                             Add to Tray
                         </button>
