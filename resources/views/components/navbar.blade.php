@@ -30,11 +30,11 @@
                     My Orders
                 </a>
 
-                @if (auth()->user()->role === 'admin')
+                <!-- @if (auth()->user()->role === 'admin')
                     <a href="/admin" class="text-sm font-medium text-stone-700 hover:text-brand transition">
                         Admin
                     </a>
-                @endif
+                @endif -->
             @endauth
         </div>
 
@@ -82,11 +82,11 @@
                     My Orders
                 </a>
 
-                @if (auth()->user()->role === 'admin')
+                <!-- @if (auth()->user()->role === 'admin')
                     <a href="/admin" class="block px-3 py-3 text-base font-medium text-stone-700 hover:text-brand hover:bg-stone-100 rounded-md transition-colors">
                         Admin
                     </a>
-                @endif
+                @endif -->
 
                 <div class="border-t border-stone-200/60 mt-2 pt-3">
                     <form action="{{ route('logout') }}" method="POST" class="w-full">
