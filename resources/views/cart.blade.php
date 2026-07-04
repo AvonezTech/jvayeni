@@ -25,6 +25,23 @@
             }
         }
     </script>
+
+    <style>
+        .processing-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(140, 56, 56, 0.15);
+            border-top-color: #8c3838;
+            border-radius: 9999px;
+            animation: spin 0.9s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-canvas text-stone-900 font-sans antialiased">
@@ -32,6 +49,8 @@
     @php
         $cart = $cart ?? [];
         $subtotal = $subtotal ?? 0;
+        $serviceCharge = 0;
+        $total = $subtotal + $serviceCharge;
 
         $getMenuPhoto = function ($photo) {
             if (!$photo) {
@@ -64,13 +83,28 @@
             </h1>
 
             <p class="text-stone-600 mt-4 text-sm md:text-base">
-                Review your selected items before placing your order.
+                Review your selected items and confirm your order.
             </p>
         </div>
 
         @if (session('success'))
             <div class="mb-6 rounded-xl border border-green-200 bg-green-50 px-5 py-4 text-green-700 text-sm font-medium">
                 {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('order_confirmed'))
+            <div class="mb-6 rounded-xl border border-green-200 bg-green-50 px-5 py-5 text-green-700">
+                <h2 class="font-heading text-3xl uppercase text-green-800 mb-1">
+                    Order Confirmed
+                </h2>
+
+                <p class="text-sm">
+                    Your order has been saved successfully.
+                    @if (session('order_id'))
+                        Order ID: #{{ session('order_id') }}
+                    @endif
+                </p>
             </div>
         @endif
 
@@ -187,14 +221,14 @@
                         <div class="flex justify-between">
                             <span class="text-stone-600">Service Charge</span>
                             <span class="font-bold text-stone-900">
-                                Rs. 0
+                                Rs. {{ number_format($serviceCharge) }}
                             </span>
                         </div>
 
                         <div class="border-t border-stone-200 pt-4 flex justify-between text-base">
                             <span class="font-bold text-stone-900">Total</span>
                             <span class="font-bold text-brand">
-                                Rs. {{ number_format($subtotal) }}
+                                Rs. {{ number_format($total) }}
                             </span>
                         </div>
                     </div>
@@ -207,12 +241,18 @@
                             Add More Items
                         </a>
 
-                        <a
-                            href="{{ route('checkout') }}"
-                            class="block w-full text-center bg-brand text-white py-3 rounded-md text-sm font-medium hover:bg-[#6f2c2c] transition"
-                        >
-                            Go to Checkout
-                        </a>
+                        <!-- Confirm Order: saves to database -->
+                        <form id="confirmOrderForm" method="POST" action="{{ route('order.store') }}">
+                            @csrf
+
+                            <button
+                                id="confirmOrderButton"
+                                type="submit"
+                                class="w-full text-center bg-brand text-white py-3 rounded-md text-sm font-medium hover:bg-[#6f2c2c] transition"
+                            >
+                                Confirm Order
+                            </button>
+                        </form>
 
                         <form method="POST" action="{{ route('cart.clear') }}">
                             @csrf
@@ -235,9 +275,15 @@
                     Cart is Empty
                 </h2>
 
-                <p class="text-stone-500 text-sm mb-6">
-                    You have not added any food item yet.
-                </p>
+                @if (session('order_confirmed'))
+                    <p class="text-stone-500 text-sm mb-6">
+                        Your order has been confirmed. You can add more items from the menu.
+                    </p>
+                @else
+                    <p class="text-stone-500 text-sm mb-6">
+                        You have not added any food item yet.
+                    </p>
+                @endif
 
                 <a
                     href="{{ route('menu') }}"
@@ -251,6 +297,38 @@
     </main>
 
     <x-footer />
+
+    <!-- Processing Popup -->
+    <div id="processingOverlay" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm items-center justify-center px-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center">
+            <div class="processing-spinner mx-auto mb-5"></div>
+
+            <h2 class="font-heading text-3xl uppercase text-stone-900 mb-2">
+                Processing
+            </h2>
+
+            <p class="text-stone-500 text-sm">
+                Please wait while we confirm your order.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const confirmOrderForm = document.getElementById('confirmOrderForm');
+        const confirmOrderButton = document.getElementById('confirmOrderButton');
+        const processingOverlay = document.getElementById('processingOverlay');
+
+        if (confirmOrderForm) {
+            confirmOrderForm.addEventListener('submit', function () {
+                processingOverlay.classList.remove('hidden');
+                processingOverlay.classList.add('flex');
+
+                confirmOrderButton.disabled = true;
+                confirmOrderButton.innerText = 'Processing...';
+                confirmOrderButton.classList.add('opacity-70', 'cursor-not-allowed');
+            });
+        }
+    </script>
 
 </body>
 </html>
