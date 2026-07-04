@@ -1,4 +1,6 @@
 <?php
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MenuItem;
@@ -11,33 +13,12 @@ use App\Http\Controllers\CartController;
 | Website Pages
 |--------------------------------------------------------------------------
 */
-/*
-----------------------------------------------------------------------
-| Cart Routes
-|--------------------------------------------------------------------------
-*/
 
-Route::middleware('auth')->group(function () {
-    Route::get('/cart', [CartController::class, 'index'])
-        ->name('cart.index');
-
-    Route::post('/cart/add', [CartController::class, 'add'])
-        ->name('cart.add');
-
-    Route::patch('/cart/update/{id}', [CartController::class, 'update'])
-        ->name('cart.update');
-
-    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])
-        ->name('cart.remove');
-
-    Route::post('/cart/clear', [CartController::class, 'clear'])
-        ->name('cart.clear');
-});
-
-// Home Page
+// Home Page - welcome.blade.php
 Route::get('/', function () {
 
     $items = MenuItem::where('is_available', true)
+        ->latest()
         ->take(4)
         ->get();
 
@@ -57,15 +38,13 @@ Route::get('/', function () {
 })->name('home');
 
 
-// Menu Page
+// Menu Page - menu.blade.php
 Route::get('/menu', function () {
 
-    // Get all available menu items
     $items = MenuItem::where('is_available', true)
         ->latest()
         ->get();
 
-    // Get today's special items
     $specialItems = MenuItem::where('is_available', true)
         ->where('is_special', true)
         ->latest()
@@ -77,7 +56,7 @@ Route::get('/menu', function () {
 })->name('menu');
 
 
-// Checkout Page
+// Checkout Page - checkout.blade.php
 Route::get('/checkout', function () {
 
     return view('checkout');
@@ -118,16 +97,54 @@ Route::post('/register', [AuthController::class, 'register'])
 
 
 // Logout User
-Route::post('/logout', function () {
+Route::post('/logout', function (Request $request) {
 
-    Auth::logout();
+    // Logout authenticated user
+    Auth::guard('web')->logout();
 
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
+    // Remove all session data, including cart
+    $request->session()->flush();
 
-    return redirect('/login');
+    // Invalidate old session
+    $request->session()->invalidate();
+
+    // Regenerate CSRF token
+    $request->session()->regenerateToken();
+
+    // Redirect to welcome.blade.php
+    return redirect()->route('home');
 
 })->name('logout');
+
+
+/*
+|--------------------------------------------------------------------------
+| Cart Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth')->group(function () {
+
+    // Show Cart Page
+    Route::get('/cart', [CartController::class, 'index'])
+        ->name('cart.index');
+
+    // Add Item to Cart
+    Route::post('/cart/add', [CartController::class, 'add'])
+        ->name('cart.add');
+
+    // Update Cart Item Quantity
+    Route::patch('/cart/update/{id}', [CartController::class, 'update'])
+        ->name('cart.update');
+
+    // Remove Item from Cart
+    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])
+        ->name('cart.remove');
+
+    // Clear Full Cart
+    Route::post('/cart/clear', [CartController::class, 'clear'])
+        ->name('cart.clear');
+});
 
 
 /*
@@ -136,13 +153,13 @@ Route::post('/logout', function () {
 |--------------------------------------------------------------------------
 */
 
-// Place Order
-Route::post('/order', [OrderController::class, 'store'])
-    ->name('order.store')
-    ->middleware('auth');
+Route::middleware('auth')->group(function () {
 
+    // Confirm Order and Save to Database
+    Route::post('/order', [OrderController::class, 'store'])
+        ->name('order.store');
 
-
+    // My Orders Page
     Route::get('/my-orders', [OrderController::class, 'myOrders'])
-    ->name('orders.my')
-    ->middleware('auth');
+        ->name('orders.my');
+});
