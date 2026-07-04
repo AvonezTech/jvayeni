@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Campus Food' }}</title>
 
+    <link rel="icon" type="image/svg+xml" href="{{ asset('static-images/logo.svg') }}">
+
     <script src="https://cdn.tailwindcss.com"></script>
 
    <script>
