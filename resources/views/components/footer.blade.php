@@ -57,8 +57,8 @@
             </div>
             
             <div class="flex gap-4 w-full md:w-auto justify-center md:justify-end order-3">
-                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                <a href="privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="terms" class="hover:text-white transition-colors">Terms of Service</a>
             </div>
         </div>
     </div>

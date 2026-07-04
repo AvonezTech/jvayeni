@@ -74,6 +74,13 @@ Route::get('/register', function () {
     return view('register');
 })->name('register');
 
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
+
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');    
 
 Route::post('/register', [AuthController::class, 'register'])
     ->name('register.submit');
