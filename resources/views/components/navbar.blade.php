@@ -3,7 +3,7 @@
         
         <!-- Logo -->
         <div class="flex-1 flex justify-start">
-            <a href="{{ route('home') }}" class="font-heading text-2xl font-bold text-brand uppercase tracking-wide">
+            <a class="font-heading text-2xl font-bold text-brand uppercase tracking-wide">
                 Campus Food
             </a>
         </div>

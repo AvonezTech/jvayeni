@@ -75,7 +75,7 @@
                 <input
                     type="password"
                     name="password_confirmation"
-                    placeholder="Confirm password"
+                    placeholder="Confirm password"  
                     required
                     class="w-full px-4 py-3 border border-[#72302b] rounded-md bg-transparent focus:outline-none focus:ring-1 focus:ring-[#72302b] placeholder-gray-400 text-gray-700 text-sm transition"
                 >
