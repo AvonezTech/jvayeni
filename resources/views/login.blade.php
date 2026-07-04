@@ -1,38 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: '#72302b',
-                        canvas: '#f7f4ec',
-                    }
-                    
-                }
-            }
-        }
-    </script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
-</head>
+<x-layout>
 
 <body class="bg-canvas min-h-screen flex flex-col">
     
-    <x-navbar />
+
 
     <main class="flex-grow flex items-center justify-center p-4 py-12">
         <div class="w-full max-w-[550px] border border-brand rounded-xl px-6 py-10 sm:px-12 sm:py-12 bg-canvas">
@@ -105,6 +75,7 @@
             </button>
 
             <div class="mt-10 flex items-center justify-start gap-4">
+
                 <div class="w-16 h-16 flex-shrink-0 text-brand">
                     <img
                         src="{{ asset('static-images/botuko.png') }}"
@@ -131,7 +102,5 @@
         </div>
     </main>
 
-    <x-footer />
-
 </body>
-</html>
+</x-layout>

@@ -1,48 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Food - Cart</title>
+<x-layout>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: '#8c3838',
-                        canvas: '#f6f5f0',
-                    },
-                    fontFamily: {
-                        heading: ['Oswald', 'sans-serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        .processing-spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid rgba(140, 56, 56, 0.15);
-            border-top-color: #8c3838;
-            border-radius: 9999px;
-            animation: spin 0.9s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-</head>
 
 <body class="bg-canvas text-stone-900 font-sans antialiased">
 
@@ -73,9 +30,8 @@
         };
     @endphp
 
-    <x-navbar />
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <main class="mpx-4 sm:px-6 lg:px-8 py-12 md:py-16">
 
         <div class="mb-10">
             <h1 class="font-heading text-5xl md:text-7xl font-bold uppercase text-stone-900 leading-none">
@@ -296,7 +252,6 @@
 
     </main>
 
-    <x-footer />
 
     <!-- Processing Popup -->
     <div id="processingOverlay" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm items-center justify-center px-4">
@@ -331,4 +286,4 @@
     </script>
 
 </body>
-</html>
+            </x-layout>

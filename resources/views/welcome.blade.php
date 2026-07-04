@@ -1,34 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Y'ALL</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: '#8c3838',
-                        canvas: '#f6f5f0',
-                    },
-                    fontFamily: {
-                        heading: ['Oswald', 'sans-serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-</head>
+<x-layout>
 
 <body class="bg-[#F8F6F1] text-stone-900 font-sans antialiased">
-    <x-navbar/>
+
 
     <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 lg:py-24">
         <div class="flex flex-col-reverse md:flex-row items-center gap-10 md:gap-12 lg:gap-16">
@@ -379,7 +352,5 @@
 
     </main>
 
-    <x-footer/>
-
 </body>
-</html>
+</x-layout>

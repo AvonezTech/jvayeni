@@ -1,31 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Food - My Orders</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: '#8c3838',
-                        canvas: '#f6f5f0',
-                    },
-                    fontFamily: {
-                        heading: ['Oswald', 'sans-serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-</head>
+<x-layout>
 
 <body class="bg-canvas text-stone-900 font-sans antialiased">
 
@@ -62,9 +35,9 @@
     };
 @endphp
 
-<x-navbar />
 
-<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+<main class=" px-4 sm:px-6 lg:px-8 py-12 md:py-16">
 
     <div class="mb-10">
         <h1 class="font-heading text-5xl md:text-7xl font-bold uppercase text-stone-900 leading-none">
@@ -231,7 +204,7 @@
 
 </main>
 
-<x-footer />
+
 
 </body>
-</html>
+        </x-layout>
