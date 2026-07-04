@@ -22,48 +22,83 @@ class OrderResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         $user = auth()->user();
+        $query = parent::getEloquentQuery()->with(['menuItems', 'user']);
         if ($user && ($user->role === 'admin' || $user->role === 'kitchen_staff')) {
-            return parent::getEloquentQuery();
+            return $query;
         }
-        return parent::getEloquentQuery()->where('user_id', $user?->id ?? 0);
+        return $query->where('user_id', $user?->id ?? 0);
     }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->required(),
-                Forms\Components\TextInput::make('total_price')
-                    ->numeric()
-                    ->prefix('Rs.')
-                    ->required(),
-                Forms\Components\Select::make('status')
-                    ->options([
-                        'pending' => 'Pending',
-                        'preparing' => 'Preparing',
-                        'ready' => 'Ready',
-                        'completed' => 'Completed',
-                        'cancelled' => 'Cancelled',
-                    ])
-                    ->required(),
-                Forms\Components\Select::make('payment_method')
-                    ->options([
-                        'cash' => 'Cash',
-                        'credit' => 'Credit',
-                        'mixed' => 'Mixed',
-                    ])
-                    ->required(),
-                Forms\Components\TextInput::make('credit_paid')
-                    ->numeric()
-                    ->prefix('Rs.')
-                    ->default(0.00),
-                Forms\Components\TextInput::make('cash_paid')
-                    ->numeric()
-                    ->prefix('Rs.')
-                    ->default(0.00),
-            ]);
+                Forms\Components\Section::make('Order Details')
+                    ->schema([
+                        Forms\Components\Select::make('user_id')
+                            ->relationship('user', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        Forms\Components\Select::make('status')
+                            ->options([
+                                'pending' => 'Pending',
+                                'preparing' => 'Preparing',
+                                'ready' => 'Ready',
+                                'completed' => 'Completed',
+                                'cancelled' => 'Cancelled',
+                            ])
+                            ->required(),
+                        Forms\Components\TextInput::make('total_price')
+                            ->numeric()
+                            ->prefix('Rs.')
+                            ->required(),
+                    ])->columns(3),
+
+                Forms\Components\Section::make('Payment Information')
+                    ->schema([
+                        Forms\Components\Select::make('payment_method')
+                            ->options([
+                                'cash' => 'Cash',
+                                'credit' => 'Credit',
+                                'mixed' => 'Mixed',
+                            ])
+                            ->required(),
+                        Forms\Components\TextInput::make('credit_paid')
+                            ->numeric()
+                            ->prefix('Rs.')
+                            ->default(0.00),
+                        Forms\Components\TextInput::make('cash_paid')
+                            ->numeric()
+                            ->prefix('Rs.')
+                            ->default(0.00),
+                    ])->columns(3),
+
+                Forms\Components\Section::make('Ordered Items')
+                    ->schema([
+                        Forms\Components\Repeater::make('orderItems')
+                            ->relationship('orderItems')
+                            ->schema([
+                                Forms\Components\Select::make('menu_item_id')
+                                    ->relationship('menuItem', 'name')
+                                    ->required()
+                                    ->searchable()
+                                    ->preload()
+                                    ->label('Menu Item'),
+                                Forms\Components\TextInput::make('quantity')
+                                    ->numeric()
+                                    ->required()
+                                    ->default(1)
+                                    ->minValue(1)
+                                    ->label('Quantity'),
+                            ])
+                            ->columns(2)
+                            ->defaultItems(1)
+                            ->label('Items')
+                            ->columnSpanFull(),
+                    ]),
+            ])
+            ->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -86,6 +121,16 @@ class OrderResource extends Resource
                         'college_staff' => 'success',
                         'student' => 'info',
                         default => 'gray',
+                    }),
+                Tables\Columns\TextColumn::make('menuItems')
+                    ->label('Ordered Items')
+                    ->getStateUsing(fn (Order $record): array => $record->menuItems->map(fn ($item) => "{$item->name} (x{$item->pivot->quantity})")->toArray())
+                    ->badge()
+                    ->color('primary')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query->whereHas('menuItems', function ($q) use ($search) {
+                            $q->where('name', 'like', "%{$search}%");
+                        });
                     }),
                 Tables\Columns\TextColumn::make('total_price')
                     ->money('NPR')
