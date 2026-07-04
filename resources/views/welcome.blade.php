@@ -61,9 +61,12 @@
     </header>
 
     <!-- TICKER / BANNER SECTION -->
-    <div class="w-full border-y-2 border-[#A44D49] bg-[#F8F6F1] py-3.5 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <ul class="flex items-center justify-between overflow-x-auto whitespace-nowrap gap-6 md:gap-8 text-brand font-medium text-sm md:text-base">
+    <div class="w-full border-y-2 border-[#A44D49] bg-[#F8F6F1] py-3.5 overflow-hidden block relative left-0 right-0 m-0 p-0">
+    
+    <div id="marquee-container" class="flex whitespace-nowrap w-full overflow-hidden relative">
+        <div id="marquee-track" class="flex whitespace-nowrap gap-8 items-center will-change-transform">
+            
+            <ul class="flex items-center gap-8 text-brand font-medium text-sm md:text-base shrink-0">
                 <li>Student Combo</li>
                 <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
                 <li>Today's Special</li>
@@ -74,7 +77,56 @@
                 <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
                 <li>Student Combo</li>
             </ul>
+
         </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const track = document.getElementById("marquee-track");
+    const container = document.getElementById("marquee-container");
+    const originalList = track.querySelector("ul");
+
+    // 1. Monitor screensize space mapping (Duplicates items dynamically to fill the viewport)
+    const containerWidth = container.offsetWidth;
+    let currentTrackWidth = originalList.offsetWidth;
+    
+    // Screen complete vanda 3 times extra elements runtime clone garcha
+    while (currentTrackWidth < (containerWidth * 3)) {
+        const clone = originalList.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
+        currentTrackWidth += originalList.offsetWidth;
+    }
+
+    // 2. High-performance Animation Loop
+    let speed = 1.2; // Speed badauna/ghatauna yo change garnus (px per frame)
+    let scrollPos = 0;
+    let isPaused = false;
+
+    function animateMarquee() {
+        if (!isPaused) {
+            scrollPos -= speed;
+            
+            // Text completely hide huna lagepachi reset right coordinates
+            if (Math.abs(scrollPos) >= originalList.offsetWidth) {
+                scrollPos = 0;
+            }
+            
+            track.style.transform = `translateX(${scrollPos}px)`;
+        }
+        requestAnimationFrame(animateMarquee);
+    }
+
+    // 3. Hover functionalities to Pause
+    track.addEventListener("mouseenter", () => isPaused = true);
+    track.addEventListener("mouseleave", () => isPaused = false);
+
+    // Start execution
+    animateMarquee();
+});
+</script>
     </div>
 
     <!-- MAIN CONTENT AREA -->
