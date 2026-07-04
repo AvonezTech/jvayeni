@@ -1,64 +1,271 @@
 <x-layout>
 
-<body class="bg-[#F8F6F1] text-stone-900 font-sans antialiased">
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 2.0s cubic-bezier(0.16, 1, 0.3, 1), transform 2.0s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 
+    <div class="bg-[#F8F6F1] text-stone-900 font-sans antialiased overflow-x-hidden">
 
-    <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 lg:py-24">
-        <div class="flex flex-col-reverse md:flex-row items-center gap-10 md:gap-12 lg:gap-16">
-            
-            <div class="w-full md:w-1/2 flex flex-col items-start text-left">
-                <h1 class="font-heading text-6xl md:text-5xl lg:text-7xl font-bold uppercase leading-none tracking-tight text-stone-900 mb-6 md:mb-8">
-                    Fresh.<br>
-                    <span class="text-brand">Affordable.</span><br>
-                    Campus Food.
-                </h1>
-
-                <p class="text-stone-700 text-lg md:text-xl font-medium max-w-md mb-8 md:mb-10 leading-relaxed">
-                    Good food fuels great minds. Enjoy wholesome meals made fresh every day for our campus family.
-                </p>
-
-                <button class="bg-brand hover:bg-[#732d2d] text-white font-medium text-lg px-8 py-3.5 rounded-sm transition-colors duration-200">
-                    <a  href="{{ route('login') }}"> View Today's Menu </a>
-                </button>
-            </div>
-
-            <div class="w-full md:w-1/2">
-                <img src="static-images/Group 16.png" alt="Delicious Campus Food" class="w-full aspect-[4/3] object-cover rounded-lg shadow-inner" />
-            </div>
-
-        </div>
-    </header>
-
-    <!-- TICKER / BANNER SECTION -->
-    <div class="w-full border-y-2 border-[#A44D49] bg-[#F8F6F1] py-3.5 overflow-hidden block relative left-0 right-0 m-0 p-0">
-        <div id="marquee-container" class="flex whitespace-nowrap w-full overflow-hidden relative">
-            <div id="marquee-track" class="flex whitespace-nowrap gap-8 items-center will-change-transform transform-gpu">
+        <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 lg:py-24">
+            <div class="flex flex-col-reverse md:flex-row items-center gap-10 md:gap-12 lg:gap-16">
                 
-                <ul class="flex items-center gap-8 text-brand font-medium text-sm md:text-base shrink-0">
-                    <li>Student Combo</li>
-                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                    <li>Today's Special</li>
-                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                    <li>Festival Offers</li>
-                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                    <li>Healthy Meals</li>
-                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                    <li>Student Combo</li>
-                </ul>
+                <div class="w-full md:w-1/2 flex flex-col items-start text-left reveal">
+                    <h1 class="font-heading text-6xl md:text-5xl lg:text-7xl font-bold uppercase leading-none tracking-tight text-stone-900 mb-6 md:mb-8">
+                        Fresh.<br>
+                        <span class="text-brand">Affordable.</span><br>
+                        Campus Food.
+                    </h1>
+
+                    <p class="text-stone-700 text-lg md:text-xl font-medium max-w-md mb-8 md:mb-10 leading-relaxed">
+                        Good food fuels great minds. Enjoy wholesome meals made fresh every day for our campus family.
+                    </p>
+
+                    <button class="bg-brand hover:bg-[#732d2d] text-white font-medium text-lg px-8 py-3.5 rounded-sm transform hover:scale-[1.03] active:scale-95 transition-all duration-300 shadow-md hover:shadow-brand/30">
+                        <a href="{{ route('login') }}" class="w-full h-full block"> View Today's Menu </a>
+                    </button>
+                </div>
+
+                <div class="w-full md:w-1/2 reveal" style="transition-delay: 150ms;">
+                    <img src="static-images/Group 16.png" alt="Delicious Campus Food" class="w-full aspect-[4/3] object-cover rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-500" />
+                </div>
 
             </div>
+        </header>
+
+        <div class="w-full border-y-2 border-[#A44D49] bg-[#F8F6F1] py-3.5 overflow-hidden block relative left-0 right-0 m-0 p-0 reveal">
+            <div id="marquee-container" class="flex whitespace-nowrap w-full overflow-hidden relative">
+                <div id="marquee-track" class="flex whitespace-nowrap gap-8 items-center will-change-transform transform-gpu">
+                    
+                    <ul class="flex items-center gap-8 text-brand font-medium text-sm md:text-base shrink-0">
+                        <li>Student Combo</li>
+                        <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                        <li>Today's Special</li>
+                        <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                        <li>Festival Offers</li>
+                        <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                        <li>Healthy Meals</li>
+                        <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                        <li>Student Combo</li>
+                    </ul>
+
+                </div>
+            </div>
         </div>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-24 space-y-16 md:space-y-20 lg:space-y-24">
+
+            <section class="reveal">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+                    
+                    <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-xl transition-all duration-300">
+                        <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-110 transition-transform duration-700 ease-in-out" />
+                        <div class="absolute inset-0 bg-black/40 z-0 group-hover:bg-black/30 transition-colors duration-500"></div>
+                        
+                        <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative transform group-hover:-translate-y-1 transition-transform duration-300">Student<br>Combo</h3>
+                        <p class="text-white text-sm font-medium z-10 relative">
+                            <a href="{{ route('login') }}" class="group-hover:underline underline-offset-4 transition-all duration-300">Order now</a>
+                        </p>
+                    </div>
+
+                    <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-xl transition-all duration-300">
+                        <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-110 transition-transform duration-700 ease-in-out" />
+                        <div class="absolute inset-0 bg-black/40 z-0 group-hover:bg-black/30 transition-colors duration-500"></div>
+                        
+                        <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative transform group-hover:-translate-y-1 transition-transform duration-300">Student<br>Combo</h3>
+                        <p class="text-white text-sm font-medium z-10 relative">
+                            <a href="{{ route('login') }}" class="group-hover:underline underline-offset-4 transition-all duration-300">Order now</a>
+                        </p>
+                    </div>
+
+                    <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-xl transition-all duration-300">
+                        <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-110 transition-transform duration-700 ease-in-out" />
+                        <div class="absolute inset-0 bg-black/40 z-0 group-hover:bg-black/30 transition-colors duration-500"></div>
+                        
+                        <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative transform group-hover:-translate-y-1 transition-transform duration-300">Student<br>Combo</h3>
+                        <p class="text-white text-sm font-medium z-10 relative">
+                            <a href="{{ route('login') }}" class="group-hover:underline underline-offset-4 transition-all duration-300">Order now</a>
+                        </p>
+                    </div>
+
+                    <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-xl transition-all duration-300">
+                        <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-110 transition-transform duration-700 ease-in-out" />
+                        <div class="absolute inset-0 bg-black/40 z-0 group-hover:bg-black/30 transition-colors duration-500"></div>
+                        
+                        <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative transform group-hover:-translate-y-1 transition-transform duration-300">Student<br>Combo</h3>
+                        <p class="text-white text-sm font-medium z-10 relative">
+                            <a href="{{ route('login') }}" class="group-hover:underline underline-offset-4 transition-all duration-300">Order now</a>
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="reveal">
+                <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-stone-900 mb-6 md:mb-8">Browse Categories</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+                    
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-[#ECE5DB] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                        <div class="h-44 md:h-48 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Breakfast" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
+                            <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Breakfast</h3>
+                            <p class="text-stone-500 text-xs md:text-sm font-medium">Start your day right</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                        <div class="h-44 md:h-48 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Lunch" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
+                            <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Lunch</h3>
+                            <p class="text-stone-500 text-xs md:text-sm font-medium">Midday fuel</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                        <div class="h-44 md:h-48 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Snacks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
+                            <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Snacks</h3>
+                            <p class="text-stone-500 text-xs md:text-sm font-medium">Quick bites</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                        <div class="h-44 md:h-48 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Drinks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
+                            <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Drinks</h3>
+                            <p class="text-stone-500 text-xs md:text-sm font-medium">Refresh yourself</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="reveal">
+                <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-stone-900 mb-6 md:mb-8">Popular This Week</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+                    
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 group">
+                        <div class="h-44 md:h-48 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="p-4 md:p-5 flex flex-col flex-grow">
+                            <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Thakali set</h3>
+                            <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 250</p>
+                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 group">
+                        <div class="h-44 md:h-48 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Momo Plate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="p-4 md:p-5 flex flex-col flex-grow">
+                            <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Chicken Momo</h3>
+                            <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 150</p>
+                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                 <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 group">
+                        <div class="h-44 md:h-48 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Veg Chowmein" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="p-4 md:p-5 flex flex-col flex-grow">
+                            <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Veg Chowmein</h3>
+                            <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 120</p>
+                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                 <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 group">
+                        <div class="h-44 md:h-48 w-full overflow-hidden">
+                            <img src="static-images/Rectangle 5.png" alt="Fried Rice" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="p-4 md:p-5 flex flex-col flex-grow">
+                            <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Mixed Fried Rice</h3>
+                            <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 180</p>
+                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                 <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="reveal">
+                <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-stone-900 mb-6 md:mb-8">Gallery</h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+                    
+                    <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
+                        <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                    </div>
+
+                    <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
+                        <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                    </div>
+
+                    <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
+                        <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                    </div>
+
+                    <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group">
+                        <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
     </div>
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
+        
+        // --- 1. NEW: Scroll Reveal Animation ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 }); // Triggers when 10% of the element is visible
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+        // --- 2. EXISTING: Marquee Logic ---
         const track = document.getElementById("marquee-track");
         const container = document.getElementById("marquee-container");
 
         if (!track || !container) return;
 
         const originalList = track.querySelector("ul");
-
         if (!originalList) return;
 
         let speed = 1.2;
@@ -68,20 +275,18 @@
         let animationFrame = null;
         let resizeTimer = null;
 
-        // Function to dynamically adjust speed based on viewport width
         function updateSpeed() {
             const screenWidth = window.innerWidth;
             if (screenWidth < 768) {
-                speed = 0.5; // Slower for mobile
+                speed = 0.5; 
             } else if (screenWidth < 1024) {
-                speed = 0.8; // Medium for tablets
+                speed = 0.8; 
             } else {
-                speed = 1.2; // Default for desktop
+                speed = 1.2; 
             }
         }
 
         function setupMarquee() {
-            // Update the speed based on current screen size before setting up
             updateSpeed();
 
             track.querySelectorAll('ul[aria-hidden="true"]').forEach(function (clone) {
@@ -127,7 +332,6 @@
 
                 track.style.transform = `translate3d(${scrollPos}px, 0, 0)`;
             }
-
             animationFrame = requestAnimationFrame(animateMarquee);
         }
 
@@ -135,7 +339,6 @@
             if (animationFrame) {
                 cancelAnimationFrame(animationFrame);
             }
-
             setupMarquee();
             animateMarquee();
         }
@@ -150,7 +353,6 @@
 
         window.addEventListener("resize", function () {
             clearTimeout(resizeTimer);
-
             resizeTimer = setTimeout(function () {
                 restartMarquee();
             }, 150);
@@ -164,197 +366,6 @@
             restartMarquee();
         }
     });
-</script>
+    </script>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-24 space-y-16 md:space-y-20 lg:space-y-24">
-
-        <section>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-                
-                <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
-                    <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
-                    <div class="absolute inset-0 bg-black/40 z-0"></div>
-                    
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">
-                        <a href="{{ route('login') }}">Order now</a></p>
-                </div>
-
-                <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
-                    <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
-                    <div class="absolute inset-0 bg-black/40 z-0"></div>
-                    
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
-                   <p class="text-white text-sm font-medium z-10 relative group-hover:underline">
-                        <a href="{{ route('login') }}">Order now</a></p>
-                </div>
-
-                <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
-                    <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
-                    <div class="absolute inset-0 bg-black/40 z-0"></div>
-                    
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">
-                        <a href="{{ route('login') }}">Order now</a></p>
-                </div>
-
-                <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
-                    <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
-                    <div class="absolute inset-0 bg-black/40 z-0"></div>
-                    
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
-                   <p class="text-white text-sm font-medium z-10 relative group-hover:underline">
-                        <a href="{{ route('login') }}">Order now</a></p>
-                </div>
-
-            </div>
-        </section>
-
-        <section>
-            <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-stone-900 mb-6 md:mb-8">Browse Categories</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-                
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-[#ECE5DB] hover:shadow-md transition-shadow cursor-pointer group">
-                    <div class="h-44 md:h-48 w-full overflow-hidden">
-                        <img src="static-images/Rectangle 5.png" alt="Breakfast" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-
-                    <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
-                        <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Breakfast</h3>
-                        <p class="text-stone-500 text-xs md:text-sm font-medium">Start your day right</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer group">
-                    <div class="h-44 md:h-48 w-full overflow-hidden">
-                        <img src="static-images/Rectangle 5.png" alt="Lunch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-
-                    <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
-                        <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Lunch</h3>
-                        <p class="text-stone-500 text-xs md:text-sm font-medium">Midday fuel</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer group">
-                    <div class="h-44 md:h-48 w-full overflow-hidden">
-                        <img src="static-images/Rectangle 5.png" alt="Snacks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-
-                    <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
-                        <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Snacks</h3>
-                        <p class="text-stone-500 text-xs md:text-sm font-medium">Quick bites</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer group">
-                    <div class="h-44 md:h-48 w-full overflow-hidden">
-                        <img src="static-images/Rectangle 5.png" alt="Drinks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-
-                    <div class="p-4 md:p-5 flex flex-col items-center justify-center text-center bg-white relative z-10">
-                        <h3 class="font-heading text-brand font-bold uppercase text-xl mb-0.5">Drinks</h3>
-                        <p class="text-stone-500 text-xs md:text-sm font-medium">Refresh yourself</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section>
-            <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-stone-900 mb-6 md:mb-8">Popular This Week</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-                
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
-                    <div class="h-44 md:h-48 w-full overflow-hidden">
-                        <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-
-                    <div class="p-4 md:p-5 flex flex-col flex-grow">
-                        <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Thakali set</h3>
-                        <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 250</p>
-
-                        <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
-                            <a href="{{ route('login') }}">Add to Tray</a>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
-                    <div class="h-44 md:h-48 w-full overflow-hidden">
-                        <img src="static-images/Rectangle 5.png" alt="Momo Plate" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-
-                    <div class="p-4 md:p-5 flex flex-col flex-grow">
-                        <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Chicken Momo</h3>
-                        <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 150</p>
-
-                        <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
-                             <a href="{{ route('login') }}">Add to Tray</a>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
-                    <div class="h-44 md:h-48 w-full overflow-hidden">
-                        <img src="static-images/Rectangle 5.png" alt="Veg Chowmein" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-
-                    <div class="p-4 md:p-5 flex flex-col flex-grow">
-                        <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Veg Chowmein</h3>
-                        <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 120</p>
-
-                        <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
-                             <a href="{{ route('login') }}">Add to Tray</a>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
-                    <div class="h-44 md:h-48 w-full overflow-hidden">
-                        <img src="static-images/Rectangle 5.png" alt="Fried Rice" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-
-                    <div class="p-4 md:p-5 flex flex-col flex-grow">
-                        <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Mixed Fried Rice</h3>
-                        <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 180</p>
-
-                        <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
-                             <a href="{{ route('login') }}">Add to Tray</a>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section>
-            <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-stone-900 mb-6 md:mb-8">Gallery</h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-                
-                <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
-                    <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-
-                <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
-                    <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-
-                <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
-                    <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-
-                <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
-                    <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-
-            </div>
-        </section>
-
-    </main>
-
-</body>
 </x-layout>

@@ -13,7 +13,7 @@
                 extend: {
                     colors: {
                         brand: '#8c3838',
-                        canvas: '#f7f4ec',
+                        canvas: '#F8F6F1',
                     },
                     fontFamily: {
                         heading: ['Oswald', 'sans-serif'],
