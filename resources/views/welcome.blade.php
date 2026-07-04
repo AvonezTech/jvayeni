@@ -18,7 +18,7 @@
                 </p>
 
                 <button class="bg-brand hover:bg-[#732d2d] text-white font-medium text-lg px-8 py-3.5 rounded-sm transition-colors duration-200">
-                    View Today's Menu
+                    <a  href="{{ route('login') }}"> View Today's Menu </a>
                 </button>
             </div>
 
@@ -176,7 +176,8 @@
                     <div class="absolute inset-0 bg-black/40 z-0"></div>
                     
                     <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
+                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">
+                        <a href="{{ route('login') }}">Order now</a></p>
                 </div>
 
                 <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
@@ -184,7 +185,8 @@
                     <div class="absolute inset-0 bg-black/40 z-0"></div>
                     
                     <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
+                   <p class="text-white text-sm font-medium z-10 relative group-hover:underline">
+                        <a href="{{ route('login') }}">Order now</a></p>
                 </div>
 
                 <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
@@ -192,7 +194,8 @@
                     <div class="absolute inset-0 bg-black/40 z-0"></div>
                     
                     <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
+                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">
+                        <a href="{{ route('login') }}">Order now</a></p>
                 </div>
 
                 <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
@@ -200,7 +203,8 @@
                     <div class="absolute inset-0 bg-black/40 z-0"></div>
                     
                     <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
+                   <p class="text-white text-sm font-medium z-10 relative group-hover:underline">
+                        <a href="{{ route('login') }}">Order now</a></p>
                 </div>
 
             </div>
@@ -273,7 +277,7 @@
                         <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 250</p>
 
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
-                            Add to Tray
+                            <a href="{{ route('login') }}">Add to Tray</a>
                         </button>
                     </div>
                 </div>
@@ -288,7 +292,7 @@
                         <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 150</p>
 
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
-                            Add to Tray
+                             <a href="{{ route('login') }}">Add to Tray</a>
                         </button>
                     </div>
                 </div>
@@ -303,7 +307,7 @@
                         <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 120</p>
 
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
-                            Add to Tray
+                             <a href="{{ route('login') }}">Add to Tray</a>
                         </button>
                     </div>
                 </div>
@@ -318,7 +322,7 @@
                         <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 180</p>
 
                         <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors">
-                            Add to Tray
+                             <a href="{{ route('login') }}">Add to Tray</a>
                         </button>
                     </div>
                 </div>
