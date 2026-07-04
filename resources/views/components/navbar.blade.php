@@ -10,7 +10,7 @@
 
         
         <!-- Auth Button -->
-        <div class="flex-1 flex justify-end">
+        <div class="flex-1 flex justify-end gap-4">
             @auth
                 <!-- Show Logout if logged in -->
                 <form action="{{ route('logout') }}" method="POST">
@@ -20,7 +20,7 @@
                     </button>
                 </form>
 
-                <a href="{{ route('orders.my') }}" class="text-sm font-medium text-stone-700 hover:text-brand transition">
+                <a href="{{ route('orders.my') }}" class="text-2xl font-medium text-stone-700 hover:text-brand transition">
     🛒
 </a>
             @else
