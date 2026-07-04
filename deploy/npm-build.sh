@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cd /home/lcktokha/public_html_avonez
+cd /home/techzeno/public_html_yall
 
 export RAYON_NUM_THREADS=1
 export GOMAXPROCS=1
