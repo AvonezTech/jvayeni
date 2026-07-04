@@ -4,7 +4,7 @@
             
             <div class="col-span-2 md:col-span-1 flex flex-col items-start">
                 <h2 class="font-heading text-3xl font-bold uppercase tracking-wide text-white mb-4">
-                    Campus<span class="text-white/60">Food</span>
+                    Y'<span class="text-white/60">ALL</span>
                 </h2>
                 <p class="text-white/80 text-sm font-medium leading-relaxed mb-6 max-w-sm">
                     Good food fuels great minds. Serving the best, fresh, and affordable meals for our campus family every single day.
