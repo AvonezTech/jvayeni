@@ -80,21 +80,44 @@
     </header>
 
     <!-- TICKER / BANNER SECTION -->
-    <div class="w-full border-y-2 border-brand/20 bg-canvas py-3.5 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Standardized gap and added shrink-0 to prevent text squishing -->
-            <ul class="flex items-center justify-between overflow-x-auto whitespace-nowrap gap-6 md:gap-8 text-brand font-medium text-sm md:text-base">
-                <li>Student Combo</li>
-                <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                <li>Today's Special</li>
-                <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                <li>Festival Offers</li>
-                <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                <li>Healthy Meals</li>
-                <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                <li>Student Combo</li>
-            </ul>
-        </div>
+    <div class="w-full border-y-2 border-brand/20 bg-canvas py-3.5 overflow-hidden block relative left-0 right-0 m-0 p-0">
+    
+    <div class="flex whitespace-nowrap min-w-full w-max gap-6 md:gap-8 items-center animate-[infinite-marquee_30s_linear_infinite] hover:[animation-play-state:paused]">
+        
+        <ul class="flex items-center gap-6 md:gap-8 text-brand font-medium text-sm md:text-base shrink-0">
+            <li>Student Combo</li>
+            <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+            <li>Today's Special</li>
+            <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+            <li>Festival Offers</li>
+            <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+            <li>Healthy Meals</li>
+            <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+            <li>Student Combo</li>
+        </ul>
+
+        <ul class="flex items-center gap-6 md:gap-8 text-brand font-medium text-sm md:text-base shrink-0" aria-hidden="true">
+            <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+            <li>Student Combo</li>
+            <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+            <li>Today's Special</li>
+            <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+            <li>Festival Offers</li>
+            <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+            <li>Healthy Meals</li>
+            <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+            <li>Student Combo</li>
+        </ul>
+
+    </div>
+</div>
+
+<style>
+@keyframes infinite-marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(calc(-50% - 12px)); } /* -50% shifts exactly one full track, 12px aligns the exact middle gap spacing */
+}
+</style>
     </div>
 
     <!-- MAIN CONTENT AREA -->
