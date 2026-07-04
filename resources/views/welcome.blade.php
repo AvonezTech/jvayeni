@@ -78,105 +78,120 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const track = document.getElementById("marquee-track");
-            const container = document.getElementById("marquee-container");
+    document.addEventListener("DOMContentLoaded", function () {
+        const track = document.getElementById("marquee-track");
+        const container = document.getElementById("marquee-container");
 
-            if (!track || !container) return;
+        if (!track || !container) return;
 
-            const originalList = track.querySelector("ul");
+        const originalList = track.querySelector("ul");
 
-            if (!originalList) return;
+        if (!originalList) return;
 
-            let speed = 1.2;
-            let scrollPos = 0;
-            let loopWidth = 0;
-            let isPaused = false;
-            let animationFrame = null;
-            let resizeTimer = null;
+        let speed = 1.2;
+        let scrollPos = 0;
+        let loopWidth = 0;
+        let isPaused = false;
+        let animationFrame = null;
+        let resizeTimer = null;
 
-            function setupMarquee() {
-                track.querySelectorAll('ul[aria-hidden="true"]').forEach(function (clone) {
-                    clone.remove();
-                });
-
-                scrollPos = 0;
-                loopWidth = 0;
-                track.style.transition = "none";
-                track.style.transform = "translate3d(0, 0, 0)";
-
-                const containerWidth = container.getBoundingClientRect().width;
-                const originalWidth = originalList.getBoundingClientRect().width;
-
-                let totalWidth = originalWidth;
-                let cloneCount = 0;
-
-                while (totalWidth < containerWidth * 3 || cloneCount < 2) {
-                    const clone = originalList.cloneNode(true);
-                    clone.setAttribute("aria-hidden", "true");
-                    track.appendChild(clone);
-
-                    totalWidth += originalWidth;
-                    cloneCount++;
-                }
-
-                const firstClone = track.querySelector('ul[aria-hidden="true"]');
-
-                if (firstClone) {
-                    loopWidth = firstClone.offsetLeft;
-                } else {
-                    loopWidth = originalWidth;
-                }
-            }
-
-            function animateMarquee() {
-                if (!isPaused && loopWidth > 0) {
-                    scrollPos -= speed;
-
-                    if (Math.abs(scrollPos) >= loopWidth) {
-                        scrollPos += loopWidth;
-                    }
-
-                    track.style.transform = `translate3d(${scrollPos}px, 0, 0)`;
-                }
-
-                animationFrame = requestAnimationFrame(animateMarquee);
-            }
-
-            function restartMarquee() {
-                if (animationFrame) {
-                    cancelAnimationFrame(animationFrame);
-                }
-
-                setupMarquee();
-                animateMarquee();
-            }
-
-            track.addEventListener("mouseenter", function () {
-                isPaused = true;
-            });
-
-            track.addEventListener("mouseleave", function () {
-                isPaused = false;
-            });
-
-            window.addEventListener("resize", function () {
-                clearTimeout(resizeTimer);
-
-                resizeTimer = setTimeout(function () {
-                    restartMarquee();
-                }, 150);
-            });
-
-            if (document.fonts && document.fonts.ready) {
-                document.fonts.ready.then(function () {
-                    restartMarquee();
-                });
+        // Function to dynamically adjust speed based on viewport width
+        function updateSpeed() {
+            const screenWidth = window.innerWidth;
+            if (screenWidth < 768) {
+                speed = 0.5; // Slower for mobile
+            } else if (screenWidth < 1024) {
+                speed = 0.8; // Medium for tablets
             } else {
-                restartMarquee();
+                speed = 1.2; // Default for desktop
             }
+        }
+
+        function setupMarquee() {
+            // Update the speed based on current screen size before setting up
+            updateSpeed();
+
+            track.querySelectorAll('ul[aria-hidden="true"]').forEach(function (clone) {
+                clone.remove();
+            });
+
+            scrollPos = 0;
+            loopWidth = 0;
+            track.style.transition = "none";
+            track.style.transform = "translate3d(0, 0, 0)";
+
+            const containerWidth = container.getBoundingClientRect().width;
+            const originalWidth = originalList.getBoundingClientRect().width;
+
+            let totalWidth = originalWidth;
+            let cloneCount = 0;
+
+            while (totalWidth < containerWidth * 3 || cloneCount < 2) {
+                const clone = originalList.cloneNode(true);
+                clone.setAttribute("aria-hidden", "true");
+                track.appendChild(clone);
+
+                totalWidth += originalWidth;
+                cloneCount++;
+            }
+
+            const firstClone = track.querySelector('ul[aria-hidden="true"]');
+
+            if (firstClone) {
+                loopWidth = firstClone.offsetLeft;
+            } else {
+                loopWidth = originalWidth;
+            }
+        }
+
+        function animateMarquee() {
+            if (!isPaused && loopWidth > 0) {
+                scrollPos -= speed;
+
+                if (Math.abs(scrollPos) >= loopWidth) {
+                    scrollPos += loopWidth;
+                }
+
+                track.style.transform = `translate3d(${scrollPos}px, 0, 0)`;
+            }
+
+            animationFrame = requestAnimationFrame(animateMarquee);
+        }
+
+        function restartMarquee() {
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+
+            setupMarquee();
+            animateMarquee();
+        }
+
+        track.addEventListener("mouseenter", function () {
+            isPaused = true;
         });
-    </script>
+
+        track.addEventListener("mouseleave", function () {
+            isPaused = false;
+        });
+
+        window.addEventListener("resize", function () {
+            clearTimeout(resizeTimer);
+
+            resizeTimer = setTimeout(function () {
+                restartMarquee();
+            }, 150);
+        });
+
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(function () {
+                restartMarquee();
+            });
+        } else {
+            restartMarquee();
+        }
+    });
+</script>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-24 space-y-16 md:space-y-20 lg:space-y-24">
 
