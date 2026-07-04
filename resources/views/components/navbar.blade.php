@@ -8,11 +8,6 @@
             </a>
         </div>
 
-        <!-- Links -->
-        <div class="flex items-center gap-8">
-            <a href="{{ route('home') }}" class="text-stone-700 hover:text-brand font-medium transition-colors">Home</a>
-            <a href="{{ route('menu') }}" class="text-stone-700 hover:text-brand font-medium transition-colors">Menu</a>
-        </div>
         
         <!-- Auth Button -->
         <div class="flex-1 flex justify-end">
