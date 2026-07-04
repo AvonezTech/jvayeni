@@ -5,14 +5,12 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
 
-        <!-- Logo -->
         <div class="flex items-center">
-            <a href="{{ route('home') }}" class="font-heading text-2xl font-bold text-brand uppercase tracking-wide">
-                Campus Food
+            <a href="{{ route('home') }}" class="flex items-center">
+                <img src="{{ asset('static-images/logo.svg') }}" alt="Campus Food Logo" class="h-40 w-auto object-contain">
             </a>
         </div>
 
-        <!-- Navigation Links -->
         <div class="hidden md:flex items-center gap-8">
             
             @auth
@@ -44,7 +42,6 @@
             @endauth
         </div>
 
-        <!-- Auth Button -->
         <div class="flex items-center justify-end gap-3">
             @auth
                 <a href="{{ route('cart.index') }}" class="md:hidden relative text-xl text-stone-700 hover:text-brand transition">
