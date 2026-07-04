@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Y'ALL</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind Custom Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -33,11 +30,9 @@
 <body class="bg-[#F8F6F1] text-stone-900 font-sans antialiased">
     <x-navbar/>
 
-    <!-- HERO SECTION -->
     <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 lg:py-24">
         <div class="flex flex-col-reverse md:flex-row items-center gap-10 md:gap-12 lg:gap-16">
             
-            <!-- Hero Text Content -->
             <div class="w-full md:w-1/2 flex flex-col items-start text-left">
                 <h1 class="font-heading text-6xl md:text-7xl lg:text-[5.5rem] font-bold uppercase leading-[0.9] tracking-tight text-stone-900 mb-6 md:mb-8">
                     Fresh.<br>
@@ -52,7 +47,6 @@
                 </button>
             </div>
 
-            <!-- Hero Image -->
             <div class="w-full md:w-1/2">
                 <img src="static-images/Group 16.png" alt="Delicious Campus Food" class="w-full aspect-[4/3] object-cover rounded-lg shadow-inner" />
             </div>
@@ -60,94 +54,59 @@
         </div>
     </header>
 
-    <!-- TICKER / BANNER SECTION -->
     <div class="w-full border-y-2 border-[#A44D49] bg-[#F8F6F1] py-3.5 overflow-hidden block relative left-0 right-0 m-0 p-0">
-    
-    <div id="marquee-container" class="flex whitespace-nowrap w-full overflow-hidden relative">
-        <div id="marquee-track" class="flex whitespace-nowrap gap-8 items-center will-change-transform">
-            
-            <ul class="flex items-center gap-8 text-brand font-medium text-sm md:text-base shrink-0">
-                <li>Student Combo</li>
-                <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                <li>Today's Special</li>
-                <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                <li>Festival Offers</li>
-                <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                <li>Healthy Meals</li>
-                <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
-                <li>Student Combo</li>
-            </ul>
+        <div class="w-full overflow-hidden relative">
+            <div class="flex whitespace-nowrap gap-8 items-center min-w-full w-max animate-[pingpong_25s_ease-in-out_infinite] hover:[animation-play-state:paused]">
+                
+                <ul class="flex items-center gap-8 text-brand font-medium text-sm md:text-base shrink-0">
+                    <li>Student Combo</li>
+                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                    <li>Today's Special</li>
+                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                    <li>Festival Offers</li>
+                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                    <li>Healthy Meals</li>
+                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                    <li>Student Combo</li>
+                </ul>
 
+                <ul class="flex items-center gap-8 text-brand font-medium text-sm md:text-base shrink-0" aria-hidden="true">
+                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                    <li>Student Combo</li>
+                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                    <li>Today's Special</li>
+                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                    <li>Festival Offers</li>
+                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                    <li>Healthy Meals</li>
+                    <li class="w-1.5 h-1.5 rounded-full bg-brand shrink-0"></li>
+                    <li>Student Combo</li>
+                </ul>
+
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const track = document.getElementById("marquee-track");
-    const container = document.getElementById("marquee-container");
-    const originalList = track.querySelector("ul");
-
-    // 1. Monitor screensize space mapping (Duplicates items dynamically to fill the viewport)
-    const containerWidth = container.offsetWidth;
-    let currentTrackWidth = originalList.offsetWidth;
-    
-    // Screen complete vanda 3 times extra elements runtime clone garcha
-    while (currentTrackWidth < (containerWidth * 3)) {
-        const clone = originalList.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        track.appendChild(clone);
-        currentTrackWidth += originalList.offsetWidth;
-    }
-
-    // 2. High-performance Animation Loop
-    let speed = 1.2; // Speed badauna/ghatauna yo change garnus (px per frame)
-    let scrollPos = 0;
-    let isPaused = false;
-
-    function animateMarquee() {
-        if (!isPaused) {
-            scrollPos -= speed;
-            
-            // Text completely hide huna lagepachi reset right coordinates
-            if (Math.abs(scrollPos) >= originalList.offsetWidth) {
-                scrollPos = 0;
-            }
-            
-            track.style.transform = `translateX(${scrollPos}px)`;
+    <style>
+    @keyframes pingpong {
+        0% {
+            transform: translateX(0%);
         }
-        requestAnimationFrame(animateMarquee);
+        50% {
+            /* Smoothly shifts the exact track length adjusting the gap padding to bounce back */
+            transform: translateX(calc(-100% + 100vw)); 
+        }
+        100% {
+            transform: translateX(0%);
+        }
     }
+    </style>
 
-    // 3. Hover functionalities to Pause
-    track.addEventListener("mouseenter", () => isPaused = true);
-    track.addEventListener("mouseleave", () => isPaused = false);
-
-    // Start execution
-    animateMarquee();
-});
-</script>
-    </div>
-
-    <!-- MAIN CONTENT AREA -->
-    <!-- Added responsive vertical padding and space-y for consistent gaps between sections -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-24 space-y-16 md:space-y-20 lg:space-y-24">
 
-        <!-- 1. PROMO CARDS SECTION -->
         <section>
-            <!-- Standardized gap: gap-4 on mobile, gap-6 on tablet, gap-8 on desktop -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
                 
-                <!-- Promo Card 1 -->
-                <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
-                    <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
-                    <div class="absolute inset-0 bg-black/40 z-0"></div> <!-- Dark Overlay -->
-                    
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
-                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
-                </div>
-
-                <!-- Promo Card 2 -->
                 <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
                     <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-black/40 z-0"></div>
@@ -156,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
                 </div>
 
-                <!-- Promo Card 3 -->
                 <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
                     <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-black/40 z-0"></div>
@@ -165,7 +123,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
                 </div>
 
-                <!-- Promo Card 4 -->
+                <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
+                    <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-black/40 z-0"></div>
+                    
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative">Student<br>Combo</h3>
+                    <p class="text-white text-sm font-medium z-10 relative group-hover:underline">Order now</p>
+                </div>
+
                 <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-md transition-shadow">
                     <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-black/40 z-0"></div>
@@ -177,14 +142,11 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         </section>
 
-        <!-- 2. BROWSE CATEGORIES SECTION -->
         <section>
-            <!-- Standardized title bottom margin: mb-6 md:mb-8 -->
             <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-stone-900 mb-6 md:mb-8">Browse Categories</h2>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
                 
-                <!-- Category Card 1 -->
                 <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-[#ECE5DB] hover:shadow-md transition-shadow cursor-pointer group">
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Breakfast" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -195,7 +157,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
 
-                <!-- Category Card 2 -->
                 <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer group">
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Lunch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -206,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
 
-                <!-- Category Card 3 -->
                 <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer group">
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Snacks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -217,7 +177,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
 
-                <!-- Category Card 4 -->
                 <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow cursor-pointer group">
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Drinks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -231,13 +190,11 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         </section>
 
-        <!-- 3. POPULAR THIS WEEK SECTION -->
         <section>
             <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-stone-900 mb-6 md:mb-8">Popular This Week</h2>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
                 
-                <!-- Product Card 1 -->
                 <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Thakali set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -251,7 +208,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
 
-                <!-- Product Card 2 -->
                 <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Momo Plate" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -265,7 +221,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
 
-                <!-- Product Card 3 -->
                 <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Veg Chowmein" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -279,7 +234,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
 
-                <!-- Product Card 4 -->
                 <div class="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200/60 transition-transform hover:-translate-y-1 group">
                     <div class="h-44 md:h-48 w-full overflow-hidden">
                         <img src="static-images/Rectangle 5.png" alt="Fried Rice" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -296,29 +250,23 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         </section>
 
-        <!-- 4. GALLERY SECTION -->
         <section>
-            <!-- Fixed the margin-bottom here from mb-2 to mb-6 md:mb-8 to perfectly match other sections -->
             <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-stone-900 mb-6 md:mb-8">Gallery</h2>
             
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
                 
-                <!-- Gallery Image 1 -->
                 <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
                     <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
 
-                <!-- Gallery Image 2 -->
                 <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
                     <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
 
-                <!-- Gallery Image 3 -->
                 <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
                     <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
 
-                <!-- Gallery Image 4 -->
                 <div class="aspect-square bg-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
                     <img src="static-images/Rectangle 5.png" alt="Campus Food Gallery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
