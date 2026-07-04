@@ -34,7 +34,7 @@
         <div class="flex flex-col-reverse md:flex-row items-center gap-10 md:gap-12 lg:gap-16">
             
             <div class="w-full md:w-1/2 flex flex-col items-start text-left">
-                <h1 class="font-heading text-6xl md:text-7xl lg:text-[5.5rem] font-bold uppercase leading-[0.9] tracking-tight text-stone-900 mb-6 md:mb-8">
+                <h1 class="font-heading text-6xl md:text-5xl lg:text-7xl font-bold uppercase leading-none tracking-tight text-stone-900 mb-6 md:mb-8">
                     Fresh.<br>
                     <span class="text-brand">Affordable.</span><br>
                     Campus Food.
