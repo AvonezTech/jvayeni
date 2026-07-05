@@ -62,52 +62,6 @@
         </div>
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-24 space-y-16 md:space-y-20 lg:space-y-24">
-            
-            <section class="reveal">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-                    
-                    <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-xl transition-all duration-300">
-                        <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-110 transition-transform duration-700 ease-in-out" />
-                        <div class="absolute inset-0 bg-black/40 z-0 group-hover:bg-black/30 transition-colors duration-500"></div>
-                        
-                        <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative transform group-hover:-translate-y-1 transition-transform duration-300">Student<br>Combo</h3>
-                        <p class="text-white text-sm font-medium z-10 relative">
-                            <a href="{{ route('login') }}" class="group-hover:underline underline-offset-4 transition-all duration-300">Order now</a>
-                        </p>
-                    </div>
-
-                    <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-xl transition-all duration-300">
-                        <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-110 transition-transform duration-700 ease-in-out" />
-                        <div class="absolute inset-0 bg-black/40 z-0 group-hover:bg-black/30 transition-colors duration-500"></div>
-                        
-                        <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative transform group-hover:-translate-y-1 transition-transform duration-300">Student<br>Combo</h3>
-                        <p class="text-white text-sm font-medium z-10 relative">
-                            <a href="{{ route('login') }}" class="group-hover:underline underline-offset-4 transition-all duration-300">Order now</a>
-                        </p>
-                    </div>
-
-                    <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-xl transition-all duration-300">
-                        <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-110 transition-transform duration-700 ease-in-out" />
-                        <div class="absolute inset-0 bg-black/40 z-0 group-hover:bg-black/30 transition-colors duration-500"></div>
-                        
-                        <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative transform group-hover:-translate-y-1 transition-transform duration-300">Student<br>Combo</h3>
-                        <p class="text-white text-sm font-medium z-10 relative">
-                            <a href="{{ route('login') }}" class="group-hover:underline underline-offset-4 transition-all duration-300">Order now</a>
-                        </p>
-                    </div>
-
-                    <div class="relative h-48 md:h-52 rounded-xl overflow-hidden flex flex-col justify-between p-5 md:p-6 shadow-sm group cursor-pointer hover:shadow-xl transition-all duration-300">
-                        <img src="static-images/Rectangle 5.png" alt="Student Combo" class="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-110 transition-transform duration-700 ease-in-out" />
-                        <div class="absolute inset-0 bg-black/40 z-0 group-hover:bg-black/30 transition-colors duration-500"></div>
-                        
-                        <h3 class="font-heading text-2xl md:text-3xl font-bold text-white uppercase leading-tight z-10 relative transform group-hover:-translate-y-1 transition-transform duration-300">Student<br>Combo</h3>
-                        <p class="text-white text-sm font-medium z-10 relative">
-                            <a href="{{ route('login') }}" class="group-hover:underline underline-offset-4 transition-all duration-300">Order now</a>
-                        </p>
-                    </div>
-
-                </div>
-            </section>
 
             <section class="reveal">
                 <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-stone-900 mb-6 md:mb-8">Browse Categories</h2>
