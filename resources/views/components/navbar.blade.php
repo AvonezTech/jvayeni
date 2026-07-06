@@ -13,35 +13,30 @@
 
         <div class="hidden md:flex items-center gap-8">
             @auth
-                <a href="{{ route('menu') }}" class="text-sm font-medium text-stone-700 hover:text-brand transition">
+                <a href="{{ route('menu') }}" class="text-sm font-medium transition py-1 {{ request()->routeIs('menu') ? 'text-brand border-b-2 border-brand' : 'text-stone-700 hover:text-brand' }}">
                     Menu
                 </a>
 
-                <a href="{{ route('cart.index') }}" class="relative text-sm font-medium text-stone-700 hover:text-brand transition">
+                <a href="{{ route('cart.index') }}" class="relative text-sm font-medium transition py-1 {{ request()->routeIs('cart.index') ? 'text-brand border-b-2 border-brand' : 'text-stone-700 hover:text-brand' }}">
                     Cart
-                    @if ($cartCount > 0)
-                        <span class="absolute -top-3 -right-5 min-w-5 h-5 px-1 rounded-full bg-brand text-white text-[11px] flex items-center justify-center">
-                            {{ $cartCount }}
-                        </span>
-                    @endif
+                    <span class="global-cart-badge absolute -top-3 -right-5 min-w-5 h-5 px-1 rounded-full bg-brand text-white text-[11px] flex items-center justify-center">
+                        {{ $cartCount ?? 0 }}
+                    </span>
                 </a>
 
-                <a href="{{ route('orders.my') }}" class="text-sm font-medium text-stone-700 hover:text-brand transition">
+                <a href="{{ route('orders.my') }}" class="text-sm font-medium transition py-1 {{ request()->routeIs('orders.my') ? 'text-brand border-b-2 border-brand' : 'text-stone-700 hover:text-brand' }}">
                     My Orders
                 </a>
-
-                @endauth
+            @endauth
         </div>
 
         <div class="flex items-center justify-end gap-3">
             @auth
-                <a href="{{ route('cart.index') }}" class="md:hidden relative text-xl text-stone-700 hover:text-brand transition mr-2">
+                <a href="{{ route('cart.index') }}" class="md:hidden relative text-xl transition mr-2 {{ request()->routeIs('cart.index') ? 'text-brand' : 'text-stone-700 hover:text-brand' }}">
                     🛒
-                    @if ($cartCount > 0)
-                        <span class="absolute -top-2 -right-3 min-w-5 h-5 px-1 rounded-full bg-brand text-white text-[11px] flex items-center justify-center">
-                            {{ $cartCount }}
-                        </span>
-                    @endif
+                    <span class="global-cart-badge absolute -top-2 -right-3 min-w-5 h-5 px-1 rounded-full bg-brand text-white text-[11px] flex items-center justify-center">
+                        {{ $cartCount ?? 0 }}
+                    </span>
                 </a>
 
                 <form action="{{ route('logout') }}" method="POST" class="hidden md:block">
@@ -69,11 +64,11 @@
     <div id="mobile-menu" class="hidden md:hidden border-t border-stone-200/60 bg-canvas absolute w-full left-0 shadow-lg origin-top">
         <div class="px-4 pt-2 pb-6 space-y-1 flex flex-col">
             @auth
-                <a href="{{ route('menu') }}" class="block px-3 py-3 text-base font-medium text-stone-700 hover:text-brand hover:bg-stone-100 rounded-md transition-colors">
+                <a href="{{ route('menu') }}" class="block px-3 py-3 text-base font-medium rounded-md transition-colors {{ request()->routeIs('menu') ? 'text-brand bg-stone-100' : 'text-stone-700 hover:text-brand hover:bg-stone-100' }}">
                     Menu
                 </a>
                 
-                <a href="{{ route('orders.my') }}" class="block px-3 py-3 text-base font-medium text-stone-700 hover:text-brand hover:bg-stone-100 rounded-md transition-colors">
+                <a href="{{ route('orders.my') }}" class="block px-3 py-3 text-base font-medium rounded-md transition-colors {{ request()->routeIs('orders.my') ? 'text-brand bg-stone-100' : 'text-stone-700 hover:text-brand hover:bg-stone-100' }}">
                     My Orders
                 </a>
 

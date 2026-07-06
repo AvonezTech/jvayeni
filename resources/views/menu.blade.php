@@ -38,6 +38,12 @@
         };
     @endphp
 
+    <!-- HIDDEN DATA FOR NAVBAR SYNC -->
+    <div id="sync-cart-count" class="hidden">{{ $cartItemCount }}</div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
     <header class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-12 pb-6 md:pt-20 md:pb-12">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-stone-200/80 pb-8">
             <div class="space-y-2">
@@ -90,7 +96,7 @@
 
                 <div class="sticky top-16 z-40 mb-8 backdrop-blur-md bg-[#FAF9F5]/90 border-b border-stone-200/40 w-full">
                     
-                    <div class="flex items-center justify-start sm:justify-center gap-6 sm:gap-8 overflow-x-auto scrollbar-none snap-x snap-mandatory px-4 sm:px-0 py-4 w-full">
+                    <div id="categories-container" class="flex items-center justify-start sm:justify-center gap-6 sm:gap-8 overflow-x-auto scrollbar-none snap-x snap-mandatory px-4 sm:px-0 py-4 w-full">
                         
                         @php 
                             $currentCat = request('category', 'all');
@@ -106,7 +112,7 @@
 
                         @foreach($categories as $key => $cat)
                             <a href="{{ route('menu', ['category' => $key]) }}" 
-                               class="flex flex-col items-center text-center gap-3 group shrink-0 snap-start select-none">
+                               class="category-link flex flex-col items-center text-center gap-3 group shrink-0 snap-start select-none">
                                 
                                 <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 transition-all duration-300 transform group-active:scale-95 shadow-sm
                                     {{ $currentCat === $key 
@@ -126,7 +132,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 xl:grid-cols-3 gap-3 md:gap-6 w-full px-4 sm:px-0">
+                <div id="menu-items-container" class="grid grid-cols-2 xl:grid-cols-3 gap-3 md:gap-6 w-full px-4 sm:px-0 transition-opacity duration-300">
 
                     @forelse ($items as $item)
                         <div class="group relative flex flex-col bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-stone-200/60 w-full">
@@ -159,7 +165,7 @@
                                         Rs. {{ number_format($item->price) }}
                                     </span>
 
-                                    <form method="POST" action="{{ route('cart.add') }}" class="shrink-0">
+                                    <form method="POST" action="{{ route('cart.add') }}" class="shrink-0 add-to-cart-form">
                                         @csrf
                                         <input type="hidden" name="menu_item_id" value="{{ $item->id }}">
                                         <button type="submit" aria-label="Add item to Tray"
@@ -185,7 +191,7 @@
 
             <aside class="order-1 lg:order-2 w-full lg:w-[360px] xl:w-[400px] shrink-0 lg:sticky lg:top-24 space-y-6 px-4 sm:px-0">
 
-                <div class="bg-white rounded-2xl border border-stone-200/80 p-5 sm:p-6 shadow-[0_25px_60px_rgba(0,0,0,0.02)] relative w-full">
+                <div id="cart-tray-container" class="hidden lg:block bg-white rounded-2xl border border-stone-200/80 p-5 sm:p-6 shadow-[0_25px_60px_rgba(0,0,0,0.02)] relative w-full">
                     <div class="flex items-center justify-between border-b border-stone-100 pb-4 mb-4 sm:mb-6">
                         <div class="flex items-center gap-2">
                             <div class="h-2 w-2 rounded-full bg-brand animate-pulse"></div>
@@ -211,10 +217,11 @@
                                     </div>
                                     <div class="flex flex-col items-end gap-1">
                                         <span class="text-xs font-bold text-stone-900">Rs. {{ number_format($cartItem['price'] * $cartItem['quantity']) }}</span>
-                                        <form method="POST" action="{{ route('cart.remove', $cartId) }}">
+                                        
+                                        <form method="POST" action="{{ route('cart.remove', $cartId) }}" class="remove-cart-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-stone-400 hover:text-red-600 text-[11px] font-medium transition-colors">
+                                            <button type="submit" class="text-stone-400 hover:text-red-600 text-[11px] font-medium transition-colors pointer-events-auto">
                                                 Remove
                                             </button>
                                         </form>
@@ -230,17 +237,17 @@
                             </div>
 
                             <div class="grid grid-cols-2 gap-2">
-                                <a href="{{ route('cart.index') }}" class="block w-full text-center bg-stone-50 hover:bg-stone-100 text-stone-900 py-2.5 sm:py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-stone-200 transition-all">
+                                <a href="{{ route('cart.index') }}" class="block w-full text-center bg-stone-50 hover:bg-stone-100 text-stone-900 py-2.5 sm:py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-stone-200 transition-all pointer-events-auto">
                                     Review
                                 </a>
-                                <a href="{{ route('checkout') }}" class="block w-full text-center bg-brand hover:bg-[#782d2a] text-white py-2.5 sm:py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-brand/10">
+                                <a href="{{ route('checkout') }}" class="block w-full text-center bg-brand hover:bg-[#782d2a] text-white py-2.5 sm:py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-brand/10 pointer-events-auto">
                                     Checkout
                                 </a>
                             </div>
 
-                            <form method="POST" action="{{ route('cart.clear') }}" class="pt-1">
+                            <form method="POST" action="{{ route('cart.clear') }}" class="pt-1 remove-cart-form">
                                 @csrf
-                                <button type="submit" class="w-full text-center text-stone-400 hover:text-stone-900 text-xs font-semibold uppercase tracking-wider transition-colors">
+                                <button type="submit" class="w-full text-center text-stone-400 hover:text-stone-900 text-xs font-semibold uppercase tracking-wider transition-colors pointer-events-auto">
                                     Reset Empty Tray
                                 </button>
                             </form>
@@ -265,7 +272,8 @@
                                     <h4 class="text-stone-950 font-semibold text-xs sm:text-sm truncate">{{ $item->name }}</h4>
                                     <p class="text-brand font-bold text-xs mt-0.5">Rs. {{ number_format($item->price) }}</p>
                                 </div>
-                                <form method="POST" action="{{ route('cart.add') }}" class="shrink-0">
+                                
+                                <form method="POST" action="{{ route('cart.add') }}" class="shrink-0 add-to-cart-form">
                                     @csrf
                                     <input type="hidden" name="menu_item_id" value="{{ $item->id }}">
                                     <button type="submit" aria-label="Add highlighting item"
@@ -289,79 +297,195 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            // ==========================================
+            // MARQUEE ANIMATION
+            // ==========================================
             const track = document.getElementById("marquee-track");
             const container = document.getElementById("marquee-container");
-            if (!track || !container) return;
-            const originalList = track.querySelector("ul");
-            if (!originalList) return;
+            if (track && container) {
+                const originalList = track.querySelector("ul");
+                let speed = 1.2, scrollPos = 0, loopWidth = 0, isPaused = false;
+                let animationFrame = null, resizeTimer = null;
 
-            let speed = 1.2;
-            let scrollPos = 0;
-            let loopWidth = 0;
-            let isPaused = false;
-            let animationFrame = null;
-            let resizeTimer = null;
-
-            function updateSpeed() {
-                const screenWidth = window.innerWidth;
-                if (screenWidth < 768) { speed = 0.5; } 
-                else if (screenWidth < 1024) { speed = 0.8; } 
-                else { speed = 1.2; }
-            }
-
-            function setupMarquee() {
-                updateSpeed();
-                track.querySelectorAll('ul[aria-hidden="true"]').forEach(function (clone) { clone.remove(); });
-                scrollPos = 0;
-                loopWidth = 0;
-                track.style.transition = "none";
-                track.style.transform = "translate3d(0, 0, 0)";
-
-                const containerWidth = container.getBoundingClientRect().width;
-                const originalWidth = originalList.getBoundingClientRect().width;
-                let totalWidth = originalWidth;
-                let cloneCount = 0;
-
-                while (totalWidth < containerWidth * 3 || cloneCount < 2) {
-                    const clone = originalList.cloneNode(true);
-                    clone.setAttribute("aria-hidden", "true");
-                    track.appendChild(clone);
-                    totalWidth += originalWidth;
-                    cloneCount++;
+                function updateSpeed() {
+                    speed = window.innerWidth < 768 ? 0.5 : (window.innerWidth < 1024 ? 0.8 : 1.2);
                 }
 
-                const firstClone = track.querySelector('ul[aria-hidden="true"]');
-                if (firstClone) { loopWidth = firstClone.offsetLeft; } 
-                else { loopWidth = originalWidth; }
-            }
+                function setupMarquee() {
+                    updateSpeed();
+                    track.querySelectorAll('ul[aria-hidden="true"]').forEach(c => c.remove());
+                    scrollPos = 0; loopWidth = 0;
+                    track.style.transition = "none"; track.style.transform = "translate3d(0, 0, 0)";
 
-            function animateMarquee() {
-                if (!isPaused && loopWidth > 0) {
-                    scrollPos -= speed;
-                    if (Math.abs(scrollPos) >= loopWidth) { scrollPos += loopWidth; }
-                    track.style.transform = `translate3d(${scrollPos}px, 0, 0)`;
+                    const containerWidth = container.getBoundingClientRect().width;
+                    const originalWidth = originalList.getBoundingClientRect().width;
+                    let totalWidth = originalWidth, cloneCount = 0;
+
+                    while (totalWidth < containerWidth * 3 || cloneCount < 2) {
+                        const clone = originalList.cloneNode(true);
+                        clone.setAttribute("aria-hidden", "true");
+                        track.appendChild(clone);
+                        totalWidth += originalWidth; cloneCount++;
+                    }
+                    const firstClone = track.querySelector('ul[aria-hidden="true"]');
+                    loopWidth = firstClone ? firstClone.offsetLeft : originalWidth;
                 }
-                animationFrame = requestAnimationFrame(animateMarquee);
+
+                function animateMarquee() {
+                    if (!isPaused && loopWidth > 0) {
+                        scrollPos -= speed;
+                        if (Math.abs(scrollPos) >= loopWidth) scrollPos += loopWidth;
+                        track.style.transform = `translate3d(${scrollPos}px, 0, 0)`;
+                    }
+                    animationFrame = requestAnimationFrame(animateMarquee);
+                }
+
+                function restartMarquee() {
+                    if (animationFrame) cancelAnimationFrame(animationFrame);
+                    setupMarquee(); animateMarquee();
+                }
+
+                track.addEventListener("mouseenter", () => isPaused = true);
+                track.addEventListener("mouseleave", () => isPaused = false);
+                window.addEventListener("resize", () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(restartMarquee, 150);
+                });
+
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(restartMarquee);
+                } else {
+                    restartMarquee();
+                }
             }
 
-            function restartMarquee() {
-                if (animationFrame) { cancelAnimationFrame(animationFrame); }
-                setupMarquee();
-                animateMarquee();
+            // ==========================================
+            // TOAST NOTIFICATION LOGIC
+            // ==========================================
+            function showToast(message) {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = 'bg-stone-900 text-white px-5 py-3.5 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.2)] text-sm font-semibold tracking-wide transform transition-all duration-300 translate-y-full opacity-0 flex items-center gap-3 border border-stone-800';
+                
+                toast.innerHTML = `
+                    <div class="bg-green-500/20 p-1.5 rounded-full text-green-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    ${message}
+                `;
+                
+                container.appendChild(toast);
+
+                requestAnimationFrame(() => {
+                    toast.classList.remove('translate-y-full', 'opacity-0');
+                });
+
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-2');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
             }
 
-            track.addEventListener("mouseenter", function () { isPaused = true; });
-            track.addEventListener("mouseleave", function () { isPaused = false; });
-            window.addEventListener("resize", function () {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(function () { restartMarquee(); }, 150);
+            // ==========================================
+            // AJAX DYNAMIC UPDATES
+            // ==========================================
+            async function fetchAndSwapDOM(url) {
+                try {
+                    const response = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+                    const html = await response.text();
+                    
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // 1. Swap main menu elements
+                    const elementsToSwap = ['menu-items-container', 'categories-container', 'cart-tray-container'];
+                    
+                    elementsToSwap.forEach(id => {
+                        const oldEl = document.getElementById(id);
+                        const newEl = doc.getElementById(id);
+                        if (oldEl && newEl) {
+                            oldEl.innerHTML = newEl.innerHTML;
+                        }
+                    });
+
+                    // 2. Sync global navbar cart badge
+                    const syncCountEl = doc.getElementById('sync-cart-count');
+                    if (syncCountEl) {
+                        const newCount = syncCountEl.innerText;
+                        
+                        // Find all instances of the global cart badge and update the text
+                        document.querySelectorAll('.global-cart-badge').forEach(badge => {
+                            badge.innerText = newCount;
+                        });
+                    }
+
+                    const menuGrid = document.getElementById('menu-items-container');
+                    if (menuGrid) menuGrid.style.opacity = '1';
+
+                } catch (error) {
+                    console.error("DOM Swap Error:", error);
+                    window.location.reload(); 
+                }
+            }
+
+            // 1. Intercept Category Clicks
+            document.body.addEventListener('click', async (e) => {
+                const categoryLink = e.target.closest('.category-link');
+                if (categoryLink) {
+                    e.preventDefault();
+                    const url = categoryLink.href;
+
+                    const menuGrid = document.getElementById('menu-items-container');
+                    if (menuGrid) menuGrid.style.opacity = '0.4';
+
+                    await fetchAndSwapDOM(url);
+                    history.pushState(null, '', url);
+                }
             });
 
-            if (document.fonts && document.fonts.ready) {
-                document.fonts.ready.then(function () { restartMarquee(); });
-            } else {
-                restartMarquee();
-            }
+            // 2. Intercept Cart Submissions
+            document.body.addEventListener('submit', async (e) => {
+                const form = e.target.closest('.add-to-cart-form, .remove-cart-form');
+                if (form) {
+                    e.preventDefault();
+                    
+                    const btn = form.querySelector('button');
+                    const originalHtml = btn.innerHTML;
+                    
+                    if (form.classList.contains('add-to-cart-form')) {
+                        btn.innerHTML = `<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-stone-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+                    } else {
+                        btn.innerHTML = '...';
+                    }
+                    btn.disabled = true;
+
+                    try {
+                        await fetch(form.action, {
+                            method: form.method || 'POST',
+                            body: new FormData(form),
+                            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                        });
+
+                        await fetchAndSwapDOM(window.location.href);
+
+                        if (form.classList.contains('add-to-cart-form')) {
+                            showToast("Item added to tray! Ready to order.");
+                        }
+
+                    } catch (error) {
+                        console.error("Cart Request Error:", error);
+                    } finally {
+                        if (document.body.contains(btn)) {
+                            btn.innerHTML = originalHtml;
+                            btn.disabled = false;
+                        }
+                    }
+                }
+            });
+
+            window.addEventListener('popstate', () => {
+                fetchAndSwapDOM(window.location.href);
+            });
         });
     </script>
 

@@ -31,11 +31,23 @@ Route::get('/', function () {
 })->name('home');
 
 
-Route::get('/menu', function () {
-    $items = MenuItem::where('is_available', true)
-        ->latest()
-        ->get();
+// UPDATED: Dynamically filter items based on the 'category' query parameter
+Route::get('/menu', function (Request $request) {
+    // 1. Get the category from the URL, defaulting to 'all'
+    $category = $request->query('category', 'all');
 
+    // 2. Start building the query for available items
+    $itemsQuery = MenuItem::where('is_available', true);
+
+    // 3. If a specific category is requested, filter the database query
+    if ($category !== 'all') {
+        $itemsQuery->where('menu_category', $category);
+    }
+
+    // 4. Execute the query
+    $items = $itemsQuery->latest()->get();
+
+    // Fetch special items for the sidebar
     $specialItems = MenuItem::where('is_available', true)
         ->where('is_special', true)
         ->latest()
