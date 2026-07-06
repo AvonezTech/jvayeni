@@ -14,22 +14,18 @@ use App\Http\Controllers\CartController;
 |--------------------------------------------------------------------------
 */
 
+// Dynamic Traffic Control: Logged-in users skip landing and go straight to the Menu.
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('menu');
+    }
+
     $items = MenuItem::where('is_available', true)
         ->latest()
         ->take(4)
         ->get();
 
-    if (Auth::check()) {
-        $orders = Auth::user()
-            ->orders()
-            ->with('menuItems')
-            ->latest()
-            ->take(10)
-            ->get();
-    } else {
-        $orders = collect();
-    }
+    $orders = collect(); // Guests have no orders
 
     return view('welcome', compact('items', 'orders'));
 })->name('home');
@@ -107,6 +103,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])
         ->name('cart.index');
 
+    // Make sure your "Add to Tray/Cart" buttons on the menu page post to this route
     Route::post('/cart/add', [CartController::class, 'add'])
         ->name('cart.add');
 
@@ -131,6 +128,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/order', [OrderController::class, 'store'])
         ->name('order.store');
 
+    // Make sure your navbar "My Orders" link points to this route name: route('orders.my')
     Route::get('/my-orders', [OrderController::class, 'myOrders'])
         ->name('orders.my');
 });

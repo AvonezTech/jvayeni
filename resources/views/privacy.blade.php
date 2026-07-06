@@ -32,7 +32,7 @@
                 
                 <section>
                     <p>
-                        At <strong class="text-stone-900 font-semibold">Campus Food</strong>, accessible from Kathmandu Business Campus, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Campus Food and how we use it.
+                        At <strong class="text-stone-900 font-semibold">Y'all Food Service</strong>, accessible from Kathmandu Business Campus, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Y'all Food Service and how we use it.
                     </p>
                 </section>
 
@@ -85,7 +85,7 @@
                 <section>
                     <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-bold uppercase text-stone-900 mb-3 sm:mb-4 tracking-wide">3. Data Management and Third Parties</h2>
                     <p>
-                        Campus Food does not sell or rent your personal metrics to third-party advertisers. Your information is strictly utilized on-site. Operational framework and software architecture services are provided by <strong class="text-stone-900 font-semibold">Zenova</strong>, acting as a technical pipeline data processor under strict confidentiality provisions.
+                        Y'all Food Service does not sell or rent your personal metrics to third-party advertisers. Your information is strictly utilized on-site. Operational framework and software architecture services are provided by <strong class="text-stone-900 font-semibold">Zenova</strong>, acting as a technical pipeline data processor under strict confidentiality provisions.
                     </p>
                 </section>
 

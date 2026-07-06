@@ -30,7 +30,9 @@
                     </p>
 
                     <button class="bg-brand hover:bg-[#732d2d] text-white font-medium text-lg px-8 py-3.5 rounded-sm transform hover:scale-[1.03] active:scale-95 transition-all duration-300 shadow-md hover:shadow-brand/30">
-                        <a href="{{ route('login') }}" class="w-full h-full block"> View Today's Menu </a>
+                        <a href="{{ auth()->check() ? route('menu') : route('login') }}" class="w-full h-full block"> 
+                            View Today's Menu 
+                        </a>
                     </button>
                 </div>
 
@@ -123,9 +125,19 @@
                         <div class="p-4 md:p-5 flex flex-col flex-grow">
                             <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Khana set</h3>
                             <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 250</p>
-                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
-                                <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
-                            </button>
+                            @auth
+                                <form action="{{ route('cart.add') }}" method="POST" class="w-full mt-auto">
+                                    @csrf
+                                    <input type="hidden" name="menu_item_id" value="1"> 
+                                    <button type="submit" class="w-full bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                        Add to Tray
+                                    </button>
+                                </form>
+                            @else
+                                <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                    <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
+                                </button>
+                            @endauth
                         </div>
                     </div>
 
@@ -136,9 +148,19 @@
                         <div class="p-4 md:p-5 flex flex-col flex-grow">
                             <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Chauchau Sadeko</h3>
                             <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 50</p>
-                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
-                                 <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
-                            </button>
+                            @auth
+                                <form action="{{ route('cart.add') }}" method="POST" class="w-full mt-auto">
+                                    @csrf
+                                    <input type="hidden" name="menu_item_id" value="2">
+                                    <button type="submit" class="w-full bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                        Add to Tray
+                                    </button>
+                                </form>
+                            @else
+                                <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                     <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
+                                </button>
+                            @endauth
                         </div>
                     </div>
 
@@ -149,9 +171,19 @@
                         <div class="p-4 md:p-5 flex flex-col flex-grow">
                             <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1"> Chowmein</h3>
                             <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 120</p>
-                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
-                                 <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
-                            </button>
+                            @auth
+                                <form action="{{ route('cart.add') }}" method="POST" class="w-full mt-auto">
+                                    @csrf
+                                    <input type="hidden" name="menu_item_id" value="3">
+                                    <button type="submit" class="w-full bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                        Add to Tray
+                                    </button>
+                                </form>
+                            @else
+                                <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                     <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
+                                </button>
+                            @endauth
                         </div>
                     </div>
 
@@ -162,9 +194,19 @@
                         <div class="p-4 md:p-5 flex flex-col flex-grow">
                             <h3 class="text-stone-800 font-bold text-sm md:text-base mb-1">Mixed Fried Rice</h3>
                             <p class="text-stone-900 font-bold text-xs md:text-sm mb-4 md:mb-5">Rs. 180</p>
-                            <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
-                                 <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
-                            </button>
+                            @auth
+                                <form action="{{ route('cart.add') }}" method="POST" class="w-full mt-auto">
+                                    @csrf
+                                    <input type="hidden" name="menu_item_id" value="4">
+                                    <button type="submit" class="w-full bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                        Add to Tray
+                                    </button>
+                                </form>
+                            @else
+                                <button class="w-full mt-auto bg-[#ab5353] hover:bg-brand text-white text-sm font-medium py-2 md:py-2.5 rounded-sm transition-colors duration-200">
+                                     <a href="{{ route('login') }}" class="block w-full h-full">Add to Tray</a>
+                                </button>
+                            @endauth
                         </div>
                     </div>
 
@@ -201,19 +243,19 @@
     <script>
     document.addEventListener("DOMContentLoaded", function () {
         
-        // --- 1. NEW: Scroll Reveal Animation ---
+        // --- 1. Scroll Reveal Animation ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
             });
-        }, { threshold: 0.1 }); // Triggers when 10% of the element is visible
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 
-        // --- 2. EXISTING: Marquee Logic ---
+        // --- 2. Marquee Logic ---
         const track = document.getElementById("marquee-track");
         const container = document.getElementById("marquee-container");
 

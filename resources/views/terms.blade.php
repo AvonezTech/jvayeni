@@ -32,7 +32,7 @@
                 
                 <section>
                     <p class="font-medium text-stone-800">
-                        By accessing and using the <strong class="text-stone-900 font-bold">Campus Food</strong> menu platform, you agree to be bound by these Terms of Service. If you do not agree to all of these terms, please refrain from using our interface or system platforms.
+                        By accessing and using the <strong class="text-stone-900 font-bold">Y'all Food Service</strong> menu platform, you agree to be bound by these Terms of Service. If you do not agree to all of these terms, please refrain from using our interface or system platforms.
                     </p>
                 </section>
 
@@ -41,7 +41,7 @@
                 <section>
                     <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-bold uppercase text-stone-900 mb-3 sm:mb-4 tracking-wide">1. Acceptance of Terms</h2>
                     <p>
-                        By accessing and using the <strong class="text-stone-900">Campus Food</strong> menu platform, you agree to be bound by these Terms of Service. If you do not agree to all of these terms, please refrain from using our interface or system platforms.
+                        By accessing and using the <strong class="text-stone-900">Y'all Food Service</strong> menu platform, you agree to be bound by these Terms of Service. If you do not agree to all of these terms, please refrain from using our interface or system platforms.
                     </p>
                 </section>
 
@@ -88,7 +88,7 @@
                 <section>
                     <h2 class="font-heading text-lg sm:text-xl md:text-2xl font-bold uppercase text-stone-900 mb-3 sm:mb-4 tracking-wide">5. Limitation of Liability</h2>
                     <p>
-                        Campus Food and its technical integration team (Zenova) shall not be held responsible for system downtimes, connection timeouts leading to missing confirmation tokens, or issues with third-party web gateways. Any payment reconciliation conflicts must be settled inside the physical KBC ground-floor canteen office.
+                        Y'all Food Service and its technical integration team (Zenova) shall not be held responsible for system downtimes, connection timeouts leading to missing confirmation tokens, or issues with third-party web gateways. Any payment reconciliation conflicts must be settled inside the physical KBC ground-floor canteen office.
                     </p>
                 </section>
 
