@@ -237,14 +237,10 @@
                             </div>
 
                             <div class="grid grid-cols-2 gap-2">
-                                <a href="{{ route('cart.index') }}" class="block w-full text-center bg-stone-50 hover:bg-stone-100 text-stone-900 py-2.5 sm:py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-stone-200 transition-all pointer-events-auto">
-                                    Review
-                                </a>
-                                <a href="{{ route('checkout') }}" class="block w-full text-center bg-brand hover:bg-[#782d2a] text-white py-2.5 sm:py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-brand/10 pointer-events-auto">
-                                    Checkout
-                                </a>
-                            </div>
-
+    <a href="{{ route('cart.index') }}" class="col-span-2 block w-full text-center bg-brand hover:bg-[#782d2a] text-white py-2.5 sm:py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-brand/10 pointer-events-auto">
+        Checkout
+    </a>
+</div>
                             <form method="POST" action="{{ route('cart.clear') }}" class="pt-1 remove-cart-form">
                                 @csrf
                                 <button type="submit" class="w-full text-center text-stone-400 hover:text-stone-900 text-xs font-semibold uppercase tracking-wider transition-colors pointer-events-auto">

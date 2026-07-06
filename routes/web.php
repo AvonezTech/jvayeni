@@ -58,9 +58,6 @@ Route::get('/menu', function (Request $request) {
 })->name('menu');
 
 
-Route::get('/checkout', function () {
-    return view('checkout');
-})->name('checkout')->middleware('auth');
 
 
 /*
